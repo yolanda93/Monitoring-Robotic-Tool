@@ -12,14 +12,68 @@
 
 </head>
 
-<body>
+<body>  
 <div class="row"> 
 
     <div class="container-fluid">   
       <div class="col-lg-2 col-md-2 col-sm-2">
-           Menu lateral<br>Menu de navegacion.............
-      </div>
+         <!--Lateral navigation bar-->
+         <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                  href="#collapseOne">
+                  Click me to exapand. Click me again to collapse.Section 1
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+              <div class="panel-body">
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+                cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+                vice lomo.
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                  href="#collapseTwo">
+                  Click me to exapand. Click me again to collapse.Section 2
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+              <div class="panel-body">
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+                cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+                vice lomo.
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" 
+                  href="#collapseThree">
+                  Click me to exapand. Click me again to collapse.Section 3
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+              <div class="panel-body">
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+                cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+                vice lomo.
+              </div>
+            </div>
+          </div> <!--End panel-default--> 
+         </div> <!--End Lateral navigation bar--> 
+      </div> <!--End column grid left-->
       
+                 
 
      <div class="col-lg-8 col-md-8 col-sm-8">
        <nav class="navbar navbar-default">
@@ -28,21 +82,22 @@
           </div>              
        </nav>              
        <div class="Grafo">
-       Imagen del Grafo<br>
-       <img src="imagenes/ImagenGrafo.png" class="img-responsive" width="1203" height="497" alt="grafoArquitectura" /> 
+        Imagen del Grafo<br>
+        <img src="imagenes/ImagenGrafo.png" class="img-responsive" width="1203" height="497" alt="grafoArquitectura" /> 
        </div>             
        <div class="Ventanas">
-       Ventanitas<br>Aqui van a ir las ventanitas...................................
+        Ventanitas<br>Aqui van a ir las ventanitas...................................
        </div>              
-     </div>   
+     </div>  <!--End main central grid-->  
+ 
+ 
  
      <div class="col-lg-2 col-md-2 col-sm-2">
         Info Errores<br>Aqui va la ventana con informacion de los errores.............
-     </div> 
-   </div>
-     
-</div>  
-   
+     </div> <!--End column grid right--> 
+   </div><!--End container--> 
+</div> <!--End row-->
+
 </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
