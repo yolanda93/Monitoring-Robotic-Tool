@@ -1,0 +1,28 @@
+------->  Monitoring Tool Development.
+
+
+1. Lanzar la aplicación Grahpviz para obetener como salida el fichero SVG que representaremos en el html.
+   Queremos lanzar la aplicación Grahpviz para obetener como salida el fichero SVG que representaremos en el html. 
+      Cómo parámetros de entrada de dicha aplicación tenemos:
+         - Número de procesos ejecutándose, mensajes que se envían entre dichos procesos, interconexión de dichos procesos. -->> La arquitectura debe tener un módulo adiccional que envie dicha información en la inicialización.
+         - Otros parámetros para visualización: orientación, tamaño del canvas.. -->> Parámetros fijos.
+   
+   
+   Questiones relacionadas:
+   --- Script que lance la aplicación en background con los parámetros de ROS e info de la arquitectura.
+   ---¿Existiría la posibilidad de darle formato posteriormente con CSS? 
+   
+   
+   
+2. Menú con los procesos visibles, estado y errores de dichos procesos con visualización de colores, distintas opciones disponibles por cada proceso.  
+3. Barra de herramientas. Filtros de información, Interacción con las ventanas que se muestra información con botones para adelante, atras etc.....
+4. Ventana con información obtenida de los mensajes que le envía el UAV.
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+http://angular-ui.github.io/bootstrap/
