@@ -1,202 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="toolController">
 <head>
-   <title>Monitoring UAV tool</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<style type="text/css">
-    .row .container-fluid .col-lg-2.col-md-2.col-sm-2 .TablaUAV .table.table-bordered tbody tr td {
-	font-size: 9px;
-	height: auto;
-	width: auto;
-}
-    .row .container-fluid .col-lg-2.col-md-2.col-sm-2 .TablaUAV .table.table-bordered tbody tr th {
-	font-size: 9px;
-	text-decoration: blink;
-}
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<title>Monitoring UAV tool</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
+<script type="text/javascript" src="js/navigationBar.js"></script>
+
 </head>
 <body>
-<div class="row"> 
-  <div class="container-fluid">  
-      <div class="col-lg-2 col-md-2 col-sm-2">
-      <img src="imagenes/uavFoto.jpg" class="img-responsive" width="317" height="189" alt="uavFoto">
+<div class="row">
+  <div class="container-fluid">
+    <div class="col-lg-2 col-md-2 col-sm-2"> <img src="imagenes/uavFoto.jpg" class="img-responsive" width="317" height="189" alt="uavFoto">
+      <div class="TablaUAV">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th>STATE</th>
+              <td>OK</td>
+              <th>Battery</th>
+              <td>65%</td>
+            </tr>
+            <tr>
+              <th>Wing Front</th>
+              <td>653 rpm</td>
+              <th>Wing left</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Wing Rigth</th>
+              <td>720 rpm</td>
+              <th>Wing Back</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Position</th>
+              <td>(3.2,4.2,1.5)</td>
+              <th>Wifi-Connection</th>
+              <td>95%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--End tabla con info del UAV --> 
       
-       <div class="TablaUAV">                      
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <th>STATE</th>
-                <td>OK</td>
-                <th>Battery</th>
-                <td>65%</td>
-              </tr>
-              <tr>
-                <th>Wing Front</th>
-                <td>653 rpm</td>
-                <th>Wing left</th>
-                <td>720 rpm</td>
-              </tr>
-              <tr>
-                <th>Wing Rigth</th>
-                <td>720 rpm</td>
-                <th>Wing Back</th>
-                <td>720 rpm</td>
-              </tr>
-              <tr>
-                <th>Position</th>
-                <td>(3.2,4.2,1.5)</td>
-                <th>Wifi-Connection</th>
-                <td>95%</td> 
-              </tr>
-            </tbody>
-          </table>
-       </div><!--End tabla con info del UAV -->    
-        
-       <div class="panel-group" id="accordion"><!--Left navigation bar -->
-         <div class="panel panel-default">
-              <div class="panel-heading">
-                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" 
-                       href="#collapseOne">
-                       Mission_Planner
-                    </a>
-                 </h4>
-              </div>
-              <div id="collapseOne" class="panel-collapse collapse in">
-                 <div class="panel-body">
-                    Options_Mission_Planner
-                 </div>
-              </div>
+      <!--Left navigation bar -->
+      <div class="mycontainer" ng-controller="MainController">
+        <div class="left-nav">
+          <accordion close-others="false" >
+            <accordion-group  is-open="isopen"
+                      ng-repeat="item in items" 
+                      ng-controller="ItemController">
+              <accordion-heading > {{item.desc}} - {{isopen}} <i class="pull-right glyphicon" 
+                                ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i> </accordion-heading>
+              <div ng-repeat="subitem in item.subitems">{{subitem.desc}}</div>
+            </accordion-group>
+          </accordion>
         </div>
-           <div class="panel panel-success">
-              <div class="panel-heading">
-                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" 
-                       href="#collapseTwo">
-                        Flight_Controller
-                    </a>
-                 </h4>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse">
-                 <div class="panel-body">
-                   Options Flight_Controller
-                 </div>
-              </div>
-           </div>
-           <div class="panel panel-info">
-              <div class="panel-heading">
-                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" 
-                       href="#collapseThree">
-                       State_Map_Estimator
-                    </a>
-                 </h4>
-              </div>
-              <div id="collapseThree" class="panel-collapse collapse">
-                 <div class="panel-body">
-                      Options  State_Map_Estimator
-                 </div>
-              </div>
-           </div>
-           <div class="panel panel-warning">
-              <div class="panel-heading">
-                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" 
-                       href="#collapseFour">
-                       Grid_Detector
-                    </a>
-                 </h4>
-              </div>
-              <div id="collapseFour" class="panel-collapse collapse">
-                 <div class="panel-body">
-                    Options Grid_Detector
-                 </div>
-              </div>
-           </div>
-           <div class="panel panel-warning">
-              <div class="panel-heading">
-                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" 
-                       href="#collapseFour">
-                       Robot_Detector
-                    </a>
-                 </h4>
-              </div>
-              <div id="collapseFour" class="panel-collapse collapse">
-                 <div class="panel-body">
-                    Options Robot_Detector
-                 </div>
-              </div>
-           </div>
-           <div class="panel panel-warning">
-              <div class="panel-heading">
-                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" 
-                       href="#collapseFour">
-                       Camera Processor
-                    </a>
-                 </h4>
-              </div>
-              <div id="collapseFour" class="panel-collapse collapse">
-                 <div class="panel-body">
-                    Options Camera Processor
-                 </div>
-              </div>
-           </div>
-           <div class="panel panel-warning">
-              <div class="panel-heading">
-                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" 
-                       href="#collapseFour">
-                       Pose_Estimator
-                    </a>
-                 </h4>
-              </div>
-              <div id="collapseFour" class="panel-collapse collapse">
-                 <div class="panel-body">
-                    Options Pose_Estimator
-                 </div>
-              </div>
-           </div>
-        </div><!--End left navigation bar -->
-    </div><!--End left column grid -->
-
-     <div class="col-lg-8 col-md-8 col-sm-8">
-       <nav class="navbar navbar-default">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">barra de herramientas</a>
-          </div>              
-       </nav>              
-       <div class="Grafo">
-        Imagen del Grafo<br>
-        <img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" />
-       </div>             
-       <div class="Ventanas">
-        <div class="well well-lg">Ventanitas<br>Aqui van a ir las ventanitas...................................</div>
-       </div>              
-     </div>  <!--End main central grid-->  
- 
- 
- 
-     <div class="col-lg-2 col-md-2 col-sm-2">
-       <div class="well well-lg"> Info Errores<br>Aqui va la ventana con informacion de los errores.............</div> 
-     </div> <!--End right column grid --> 
-
-
-
-  </div> <!--End container--> 
-</div> <!--End row-->
- 
+      </div>
+      <!--End left navigation bar --> 
+    </div>
+    <!--End left column grid -->
+    
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
+      </nav>
+      <div class="Grafo"> Imagen del Grafo<br>
+        <img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>
+      <div class="Ventanas">
+        <div class="well well-lg">Ventanitas<br>
+          Aqui van a ir las ventanitas...................................</div>
+      </div>
+    </div>
+    <!--End main central grid-->
+    
+    <div class="col-lg-2 col-md-2 col-sm-2">
+      <div class="well well-lg"> Info Errores<br>
+        Aqui va la ventana con informacion de los errores.............</div>
+    </div>
+    <!--End right column grid --> 
+    
+  </div>
+  <!--End container--> 
+</div>
+<!--End row-->
 
 </body>
-<script type="text/javascript">
-   $(function () { $('#collapseFour').collapse({
-      toggle: false
-   })});
-   $(function () { $('#collapseTwo').collapse('show')});
-   $(function () { $('#collapseThree').collapse('toggle')});
-   $(function () { $('#collapseOne').collapse('hide')});
-</script> 
+
 </html>
