@@ -25,9 +25,9 @@
           <tbody>
             <tr>
               <th>Battery</th>
+              <td>65%</td>
               <th>STATE</th>
               <td>OK</td>
-              <td>65%</td>
             </tr>
             <tr>
               <th>Wing Front</th>
@@ -53,8 +53,7 @@
       <!--End tabla con info del UAV --> 
       
       <!--Left navigation bar -->
-      <div class="mycontainer" ng-controller="MainController">
-        <div class="left-nav">
+        <div class="left-nav" ng-controller="MainController">
           <accordion close-others="false" >
             <accordion-group  is-open="isopen"
                       ng-repeat="item in items" 
@@ -65,28 +64,20 @@
             </accordion-group>
           </accordion>
         </div>
-      </div>
       <!--End left navigation bar --> 
     </div>
     <!--End left column grid -->
     
-    <div class="col-lg-8 col-md-8 col-sm-8">
+    <div class="col-lg-10 col-md-10 col-sm-10">
       <nav class="navbar navbar-default">
         <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
       </nav>
       <div class="Grafo"> Imagen del Grafo<br>
         <img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>
-      <div class="Ventanas">
-        <div class="well well-lg">Ventanitas<br>
-          Aqui van a ir las ventanitas...................................</div>
-      </div>
     </div>
     <!--End main central grid-->
     
-    <div class="col-lg-2 col-md-2 col-sm-2">
-      <div class="well well-lg"> Info Errores<br>
-        Aqui va la ventana con informacion de los errores.............</div>
-    </div>
+ 
     <!--End right column grid --> 
     
   </div>
