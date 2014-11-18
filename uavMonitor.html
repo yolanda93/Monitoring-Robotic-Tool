@@ -103,33 +103,33 @@
 
 // create an array with edges
   var edges = [
-    {from: 2, to: 3},
-	{from: 2, to: 1},
-    {from: 1, to: 2},
-	{from: 9, to: 1},
-	{from: 9, to: 2},
-	{from: 7, to: 9},
-	{from: 8, to: 10},
-    {from: 8, to: 10},
-	{from: 10, to: 8},		
-    {from: 4, to: 10},
-	{from: 5, to: 6},
-    {from: 6, to: 8},
-	{from: 6, to: 7},	
-	{from: 7, to: 8},			
-	{from: 8, to: 9},		
-  ];
+    {from: 2, to: 3, label: 'FlightOrder'},
+	{from: 2, to: 1, label: 'ActionConfirmation'},
+    {from: 1, to: 2, label: 'ActionRequest'},
+	{from: 9, to: 1, label: 'StateMapAbstraction'},
+	{from: 9, to: 2, label: 'StateMapAbstraction'},
+	{from: 7, to: 9, label: 'RobotStateAbstraction'},
+	{from: 8, to: 10, label: 'GridStateAbstraction'},
+	{from: 10, to: 8, label: 'UAVPositionChange'},		
+    {from: 4, to: 10, label: 'OdometryChange'},
+	{from: 5, to: 6, label: 'RealImageOnFligth'},
+    {from: 6, to: 8, label: 'CameraFrameAbstraction'},
+	{from: 6, to: 7, label: 'CameraFrameAbstraction'},	
+	{from: 7, to: 8, label: 'GridStateAbstraction'},			
+	{from: 8, to: 9, label: 'GridStateAbstraction'}
+	]
   
   var conn = edges.length * 2;
   var rand = Math.floor(Math.random() * conn);
   // create an array with nodes
-  var escala = 0.05;
+  var escala = 0.055;
+  var escala2 = 0.05;
   var nodes = [
     {id: 1, label: 'Mission Planner', x:24364.9 * escala, y:-10697.8 * escala, allowedToMoveX: true, allowedToMoveY: true},
     {id: 2, label: 'Fligth_Controller', x: 28711.9 * escala, y:-10099.8 * escala, allowedToMoveX: true, allowedToMoveY: true},
-	{id: 3, label: 'Pilot_Driver',  x:31942.9 * escala, y:-10099.8 * escala , allowedToMoveX: true, allowedToMoveY: true},
+	{id: 3, label: 'Pilot_Driver',  x:31942.9 * escala, y:-10099.8 * escala2 , allowedToMoveX: true, allowedToMoveY: true},
 	{id: 4, label: 'Odometry_Driver', x:10405.9 * escala, y:-2558.84 * escala , allowedToMoveX: true, allowedToMoveY: true},
-    {id: 5, label: 'Camera_Driver',x:1067.92 * escala, y:-8828.84 * escala, allowedToMoveX: true, allowedToMoveY: true},
+    {id: 5, label: 'Camera_Driver',x:1067.92 * escala, y:-8828.84 * escala2, allowedToMoveX: true, allowedToMoveY: true},
     {id: 6, label: 'Camera_Processor',x:5362.92 * escala, y:-8828.84 * escala, allowedToMoveX: true, allowedToMoveY: true},
     {id: 7, label: 'Robot_Detector',x:14818.9 * escala, y:-9858.8 * escala, allowedToMoveX: true, allowedToMoveY: true},
     {id: 8, label: 'Grid_Detector',  x:10405.9 * escala, y:-7222.84 * escala, allowedToMoveX: true, allowedToMoveY: true},
