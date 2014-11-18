@@ -17,8 +17,8 @@
 <script type="text/javascript" src="js/navigationBar.js"></script>
   <style type="text/css">
     #mynetwork {
-      width: 2159px;
-      height: 864px;
+      width: 1203px;
+      height: 497px;
       border: 1px solid lightgray;
     }
   </style>
@@ -81,7 +81,7 @@
       <nav class="navbar navbar-default">
         <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
       </nav>
-      <div class="Grafo"> Imagen del Grafo<br>
+      <div class="Grafo"> 
         <div id="mynetwork"></div>
         <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>-->
     </div>
@@ -124,10 +124,11 @@
   // create an array with nodes
   var escala = 0.055;
   var escala2 = 0.05;
+  var escala3 = 0.06;
   var nodes = [
     {id: 1, label: 'Mission Planner', x:24364.9 * escala, y:-10697.8 * escala, allowedToMoveX: true, allowedToMoveY: true},
     {id: 2, label: 'Fligth_Controller', x: 28711.9 * escala, y:-10099.8 * escala, allowedToMoveX: true, allowedToMoveY: true},
-	{id: 3, label: 'Pilot_Driver',  x:31942.9 * escala, y:-10099.8 * escala2 , allowedToMoveX: true, allowedToMoveY: true},
+	{id: 3, label: 'Pilot_Driver',  x:31942.9 * escala, y:-10099.8 * escala3 , allowedToMoveX: true, allowedToMoveY: true},
 	{id: 4, label: 'Odometry_Driver', x:10405.9 * escala, y:-2558.84 * escala , allowedToMoveX: true, allowedToMoveY: true},
     {id: 5, label: 'Camera_Driver',x:1067.92 * escala, y:-8828.84 * escala2, allowedToMoveX: true, allowedToMoveY: true},
     {id: 6, label: 'Camera_Processor',x:5362.92 * escala, y:-8828.84 * escala, allowedToMoveX: true, allowedToMoveY: true},
