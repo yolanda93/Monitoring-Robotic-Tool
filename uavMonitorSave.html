@@ -8,7 +8,7 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
-<link rel="stylesheet" href="css/vis/vis.css">
+<link rel="stylesheet" href="js/vis/vis.css">
 <script type="text/javascript" src="js/vis/vis.js"></script>
 <script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -96,11 +96,10 @@
 <!--End row-->
 
 
-
-
-
 <script type="text/javascript">
 
+var dropdown = document.getElementById("dropdownID");
+dropdown.onchange = update;
 // create an array with edges
   var edges = [
     {from: 2, to: 3},
@@ -153,7 +152,7 @@
   var network = new vis.Network(container, data, options);
 
     function update() {
-        var type ="continuous";
+        var type = dropdown.value;
         network.setOptions({smoothCurves:{type:type}});
     }
 </script>
