@@ -1931,7 +1931,7 @@ th {
 }
 .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
 	border: 1px solid #ddd;
-	font-size: 6px;
+	font-size: 9px;
 	margin-bottom: 0px;
 }
 .table-bordered>thead>tr>th, .table-bordered>thead>tr>td {

@@ -1,169 +1,178 @@
 <!DOCTYPE html>
 <html ng-app="toolController">
-  <head>
-  <title>Monitoring UAV tool</title>
+<head>
+<title>Fault Management Tool</title>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.min.css">
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap-theme.min.css">
-  <!-- Latest compiled and minified JavaScript -->
-  <link rel="stylesheet" href="css/vis/vis.css">
-  <script type="text/javascript" src="js/vis/vis.js"></script>
-  <script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
-  <script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
-  <script type="text/javascript" src="js/navigationBar.js"></script>
-  <style type="text/css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="sylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<link rel="stylesheet" href="css/vis/vis.css">
+<script type="text/javascript" src="js/vis/vis.js"></script>
+<script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+<script type="text/javascript" src="js/navigationBar.js"></script>
+<style type="text/css">
 #mynetwork {
 	width: auto;
-	height: 497px;
+	height: 760px;
 	border: 1px solid lightgray;
 }
-.container-fluid .col-lg-2.col-md-2.col-sm-2 .left-nav accordion accordion-group div {
-	font-size: 1px;
-}
 .accordion-heading .my_heading_accordion {
-  color: red;
-  font-size:3em;
+	color: red;
+	font-size: 3em;
 }
+
 </style>
-  </head>
-  <body>
+</head>
+<body  onload="draw()">
 <div class="row">
 <div class="container-fluid">
-    <div class="col-lg-2 col-md-2 col-sm-2 ">
+  <div class="col-lg-2 col-md-2 col-sm-2 ">
     <div class="hidden-xs"> <img src="imagenes/uavFoto.jpg" class="img-responsive" width="317" height="189" alt="uavFoto" > </div>
     <div class="table-responsive">
-        <table id="table" class="table table-bordered table-condensed" >
+      <table id="table" class="table table-bordered table-condensed" >
         <tbody>
-            <tr>
+          <tr>
             <th>Battery</th>
-            <td>65%</td>
+            <td>65%</td>  
+          </tr>
+          <tr>
             <th>STATE</th>
             <td>OK</td>
           </tr>
-            <tr>
+           <tr>
             <th>Wing Front</th>
             <td>653 rpm</td>
+          </tr>
+          <tr>
             <th>Wing left</th>
             <td>720 rpm</td>
           </tr>
-            <tr>
+          <tr>
             <th>Wing Rigth</th>
             <td>720 rpm</td>
+          </tr>
+          <tr>
             <th>Wing Back</th>
             <td>720 rpm</td>
           </tr>
-            <tr>
+          <tr>
             <th>Position</th>
             <td>(3.2,4.2,1.5)</td>
+          </tr>
+          <tr>
             <th>Wifi-Connection</th>
             <td>95%</td>
           </tr>
-          </tbody>
+        </tbody>
       </table>
-      </div>
+    </div>
     <!--End tabla con info del UAV --> 
     
     <!--Left navigation bar -->
-    
-    <div ng-controller="AccordionDemoCtrl">
-        <accordion close-others=false>
-        <accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled"> This content is straight in the template. </accordion-group>
-        <accordion-group heading="{{group.title}}" ng-repeat="group in groups"> {{group.content}} </accordion-group>
-        <accordion-group heading="Dynamic Body Content">
-            <p>The body of the accordion group grows to fit the contents</p>
-            <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-            <div ng-repeat="item in items">{{item}}</div>
+  <div ng-controller="myController">
+      <accordion close-others="oneAtATime" >
+        <accordion-group  ng-repeat="group in groups">
+          <accordion-heading class="accordion-heading"  is-open="status.open"> {{group}}<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>  </accordion-heading>
+          {{group.content}}
           </accordion-group>
-        <accordion-group is-open="status.open">
-            <accordion-heading class="accordion-heading"  > mission_planner <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i> </accordion-heading>
-            This is just some content to illustrate fancy headings. </accordion-group>
       </accordion>
-      </div>
+    </div>
     
     <!--End left navigation bar --> 
   </div>
-    <!--End left column grid -->
-    
-    <div class="col-lg-10 col-md-10 col-sm-10">
+  <!--End left column grid -->
+  
+  <div class="col-lg-10 col-md-10 col-sm-10">
     <nav class="navbar navbar-default">
-        <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
-      </nav>
-    <div class="Grafo class="col-lg-10 col-md-10 col-sm-10"">
-        <div id="mynetwork"></div>
-        <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>--> 
-      </div>
+      <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
+    </nav>
+    
+   
+ 
+     <div class="Grafo">
+      <div id="mynetwork"></div>
+      <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>--> 
+        </div>
     <!--End main central grid--> 
     
     <!--End right column grid --> 
     
   </div>
-    <!--End container--> 
-  </div>
+  <!--End container--> 
+</div>
 <!--End row--> 
 
 <script type="text/javascript">
+var nodes = null;
+var edges = null;
+var network = null;
 
-// create an array with edges
-  var edges = [
-    {from: 2, to: 3,  style: 'arrow', label: 'FlightOrder'},
-	{from: 2, to: 1, style: 'arrow', label: 'ActionConfirmation'},
-    {from: 1, to: 2, style: 'arrow', label: 'ActionRequest'},
-	{from: 9, to: 1, style: 'arrow', label: 'StateMapAbstraction'},
-	{from: 9, to: 2, style: 'arrow', label: 'StateMapAbstraction'},
-	{from: 7, to: 9, style: 'arrow', label: 'RobotStateAbstraction'},
-	{from: 8, to: 10, style: 'arrow', label: 'GridStateAbstraction'},
-	{from: 10, to: 8, style: 'arrow', label: 'UAVPositionChange'},		
-    {from: 4, to: 10, style: 'arrow', label: 'OdometryChange'},
-	{from: 5, to: 6, style: 'arrow', label: 'RealImageOnFligth'},
-    {from: 6, to: 8, style: 'arrow', label: 'CameraFrameAbstraction'},
-	{from: 6, to: 7, style: 'arrow', label: 'CameraFrameAbstraction'},	
-	{from: 7, to: 8, style: 'arrow', label: 'GridStateAbstraction'},			
-	{from: 8, to: 9, style: 'arrow', label: 'GridStateAbstraction'}
-	]
-  
-  var conn = edges.length * 2;
-  var rand = Math.floor(Math.random() * conn);
+//Prueba 1
+var origin = [2,2,1,9,9,7,8,10,4,5,6,6,7,8];
+var destination = [3,1,2,1,2,9,10,8,10,6,8,7,8,9];
+var messages = ['FlightOrder', 'ActionConfirmation', 'ActionRequest', 'StateMapAbstraction','StateMapAbstraction','RobotStateAbstraction', 'GridStateAbstraction','UAVPositionChange', 'OdometryChange', 'RealImageOnFligth','CameraFrameAbstraction','CameraFrameAbstraction','GridStateAbstraction','GridStateAbstraction'];
+var process = ['Mission Planner','Fligth_Controller', 'Pilot_Driver','Odometry_Driver','Camera_Driver','Camera_Processor','Robot_Detector', 'Grid_Detector','State_Map_Estimator','Pose_Estimator'];
+var pointX = [24364.9,28711.9,31942.9,10405.9,1067.92,5362.92,14818.9,10405.9,19631.9,14818.9];
+var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-7222.84,-7720.84,-4665.84 ];
+
+
+
+// Prueba 2
+//var origin = [2,2,1,9,9,7,8,10,4,5,6,6,7,8,12,12,11,19,19,17,18,10,14,15,16,16,17,18];
+//var destination = [3,1,2,1,2,9,10,8,10,6,8,7,8,9,13,11,12,11,12,19,10,18,10,16,18,17,18,19];
+//var messages = ['FlightOrder', 'ActionConfirmation', 'ActionRequest', 'StateMapAbstraction','StateMapAbstraction','RobotStateAbstraction', 'GridStateAbstraction','UAVPositionChange', 'OdometryChange', 'RealImageOnFligth','CameraFrameAbstraction','CameraFrameAbstraction','GridStateAbstraction','GridStateAbstraction','Flight2Order', 'ActionCon2firmation', 'ActionReque2st', 'StateMapAbstrac2tion','StateMapAbstrac2tion','RobotStateAbstra2ction', 'GridStateAbstractio2n','UAVPositionChange2', 'OdometryChange2', 'RealImageOnFligth2','CameraFrameAbstraction2','CameraFrameAbstraction2','GridStateAbstraction2','GridStateAbstraction2'];
+//var process = ['Mission Planner','Fligth_Controller', 'Pilot_Driver','Odometry_Driver','Camera_Driver','Camera_Processor','Robot_Detector', 'Grid_Detector','State_Map_Estimator','Pose_Estimator','Mission Planner2','Fligth_Controller2', 'Pilot_Driver2','Odometry_Driver2','Camera_Driver2','Camera_Processor2','Robot_Detector2', 'Grid_Detector2','State_Map_Estimator2','Pose_Estimator2'];
+//var pointX = [24364.9,28711.9,31942.9,10405.9,1067.92,5362.92,14818.9,10405.9,19631.9,14818.9,64364.9,18711.9,21942.9,20405.9,2067.92,4362.92,24818.9,40405.9,29631.9,44818.9 ];
+//var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-7222.84,-7720.84,-4665.84,-30697.8,-20099.8,-30099.8,-4558.84,-3828.84,-4828.84,-4858.8,-5222.84,-6720.84,-7665.84  ];
+
+
+ function draw() {
+	 
   // create an array with nodes
   var escala = 0.055;
   var escala2 = 0.05;
   var escala3 = 0.06;
   var ErrorColor = "color: red"
-  var nodes = [
-    {id: 1, label: 'Mission Planner', x:24364.9 * escala, y:-10697.8 * escala, shape: 'circle', allowedToMoveX: true, allowedToMoveY: true },
-    {id: 2, label: 'Fligth_Controller', x: 28711.9 * escala, y:-10099.8 * escala,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-	{id: 3, label: 'Pilot_Driver',  x:31942.9 * escala, y:-10099.8 * escala3 ,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-	{id: 4, label: 'Odometry_Driver', x:10405.9 * escala, y:-2558.84 * escala ,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-    {id: 5, label: 'Camera_Driver',x:1067.92 * escala, y:-8828.84 * escala2,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-    {id: 6, label: 'Camera_Processor',x:5362.92 * escala, y:-8828.84 * escala,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-    {id: 7, label: 'Robot_Detector',x:14818.9 * escala, y:-9858.8 * escala,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-    {id: 8, label: 'Grid_Detector',  x:10405.9 * escala, y:-7222.84 * escala,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-	{id: 9, label: 'State_Map_Estimator',x:19631.9 * escala, y:-7720.84 * escala,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-    {id: 10, label: 'Pose_Estimator',  x:14818.9 * escala, y:-4665.84 * escala ,  shape: 'circle', allowedToMoveX: true, allowedToMoveY: true},
-
-
-	//	{id: 3, label: 'Node 3', x:150, y:130,  allowedToMoveX: false, allowedToMoveY: t}
-  ];
-
   
+   // create an array with edges
+   edges = [];
+  // to fill the edges.
+  for (var i = 0; i <= origin.length; i++) {
+	 edges.push({from: origin[i], to: destination[i], style: 'arrow', label: messages[i]});
+ }
 
-  // create a network
+
+   // create an array with nodes.
+   nodes = [];
+  // to fill the nodes properties.
+  for (var i = 0; i <= process.length; i++) {
+	 nodes.push( {id: i+1, label: process[i], x:pointX[i]*escala, y:pointY[i]*escala, shape: 'circle', allowedToMoveX: true, allowedToMoveY: true });
+ }
+ 
+
+    // create a network
   var container = document.getElementById('mynetwork');
   var data = {
     nodes: nodes,
     edges: edges
   };
-  var options = {physics:{barnesHut:{gravitationalConstant:0, springConstant:0, centralGravity: 0}},
-  smoothCurves:{dynamic:false, type: '1'}};
+  var options = {physics:{barnesHut:{gravitationalConstant:0, springConstant:0, centralGravity: 0}},smoothCurves:{dynamic:false, type: '1'}};
   var network = new vis.Network(container, data, options);
 
-    function update() {
-        var type ="continuous";
-        network.setOptions({smoothCurves:{type:type}});
-    }
+// network.on('select', function (properties) {
+//  alert('selected nodes: ' + properties.nodes);
+//});
+}
+
+
+  
+
+
 </script>
 </body>
 </html>
