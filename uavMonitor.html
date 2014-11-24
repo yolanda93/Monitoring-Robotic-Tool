@@ -18,7 +18,7 @@
 <style type="text/css">
 #mynetwork {
 	width: auto;
-	height: 760px;
+	height:auto;
 	border: 1px solid lightgray;
 }
 .accordion-heading .my_heading_accordion {
@@ -79,7 +79,7 @@
         <accordion-group  ng-repeat="group in groups">
           <accordion-heading class="accordion-heading"  is-open="status.open"> {{group}}<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>  </accordion-heading>
           {{group.content}}
-          </accordion-group>
+        </accordion-group>
       </accordion>
     </div>
     
@@ -97,7 +97,7 @@
      <div class="Grafo">
       <div id="mynetwork"></div>
       <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>--> 
-        </div>
+    </div>
     <!--End main central grid--> 
     
     <!--End right column grid --> 
@@ -154,15 +154,26 @@ var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-722
 	 nodes.push( {id: i+1, label: process[i], x:pointX[i]*escala, y:pointY[i]*escala, shape: 'circle', allowedToMoveX: true, allowedToMoveY: true });
  }
  
-
+  
     // create a network
-  var container = document.getElementById('mynetwork');
+  var canvas = document.getElementById('mynetwork');
+  
+
   var data = {
     nodes: nodes,
     edges: edges
   };
-  var options = {physics:{barnesHut:{gravitationalConstant:0, springConstant:0, centralGravity: 0}},smoothCurves:{dynamic:false, type: '1'}};
-  var network = new vis.Network(container, data, options);
+  var tamano= screen.height*0.8;
+  var tamanoPx= tamano + 'px' 
+  console.log(screen.height);
+  console.log(tamanoPx);
+  var options = {
+	  physics:{barnesHut:{gravitationalConstant:0, springConstant:0, centralGravity: 0}}
+	  ,smoothCurves:{dynamic:false, type: '1'},
+	  width: 'auto',
+      height: tamanoPx 
+	  };
+  var network = new vis.Network(canvas, data, options);
 
 // network.on('select', function (properties) {
 //  alert('selected nodes: ' + properties.nodes);
