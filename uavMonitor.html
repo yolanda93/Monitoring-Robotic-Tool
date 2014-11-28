@@ -145,20 +145,14 @@ var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-722
   for (var i = 0; i <= origin.length; i++) {
 	 edges.push({from: origin[i], to: destination[i], style: 'arrow', label: messages[i]});
  }
-
-
    // create an array with nodes.
    nodes = [];
   // to fill the nodes properties.
   for (var i = 0; i <= process.length; i++) {
 	 nodes.push( {id: i+1, label: process[i], x:pointX[i]*escala, y:pointY[i]*escala, shape: 'circle', allowedToMoveX: true, allowedToMoveY: true });
  }
- 
-  
     // create a network
   var canvas = document.getElementById('mynetwork');
-  
-
   var data = {
     nodes: nodes,
     edges: edges
@@ -173,11 +167,11 @@ var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-722
 	  width: 'auto',
       height: tamanoPx 
 	  };
-  var network = new vis.Network(canvas, data, options);
+  var network = new vis.Network(canvas, data, options); 
 
-// network.on('select', function (properties) {
-//  alert('selected nodes: ' + properties.nodes);
-//});
+network.on('select', function (properties) {
+  alert('Se ha seleccionado el proceso: ' + properties.nodes);
+});
 }
 
 
