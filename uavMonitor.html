@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="toolController">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Fault Management Tool</title>
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.min.css">
-<!-- Optional theme -->
 <link rel="sylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
 <link rel="stylesheet" href="css/vis/vis.css">
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="js/vis/vis.js"></script>
 <script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/ui-utils.js"></script>
 <script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.0.min.js"></script>
 <script type="text/javascript" src="js/navigationBar.js"></script>
 <style type="text/css">
 #mynetwork {
 	width: auto;
-	height:auto;
+	height: auto;
 	border: 1px solid lightgray;
 }
 .accordion-heading .my_heading_accordion {
 	color: red;
 	font-size: 3em;
 }
-
 </style>
 </head>
 <body  onload="draw()">
@@ -38,13 +36,13 @@
         <tbody>
           <tr>
             <th>Battery</th>
-            <td>65%</td>  
+            <td>65%</td>
           </tr>
           <tr>
             <th>STATE</th>
             <td>OK</td>
           </tr>
-           <tr>
+          <tr>
             <th>Wing Front</th>
             <td>653 rpm</td>
           </tr>
@@ -74,11 +72,24 @@
     <!--End tabla con info del UAV --> 
     
     <!--Left navigation bar -->
-  <div ng-controller="myController">
-      <accordion close-others="oneAtATime" >
-        <accordion-group  ng-repeat="group in groups">
-          <accordion-heading class="accordion-heading"  is-open="status.open"> {{group}}<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>  </accordion-heading>
-          {{group.content}}
+    <div ng-controller="processBrowser">
+      <accordion close-others="oneAtATime">
+        <accordion-group  heading="{{group.module}}" ng-repeat="group in groups | orderBy:'module' | unique:'module' " >
+          <accordion close-others="oneAtATime">
+            <accordion-group heading="{{group.process}}" ng-repeat="group in groups | orderBy:'process' | filter: group.module | unique:'process' " >
+               <!--Tipos de Mensaje : Input-->
+               <accordion close-others="oneAtATime">
+              <accordion-group heading="{{group.message.Type}}"  ng-repeat="group in groups | orderBy:'Type'  | filter: group.process | unique:'Type' ">
+              <accordion close-others="oneAtATime">
+                <accordion-group heading="{{group.message.Name}}" ng-repeat="group in groups | orderBy:'message.Name' | filter: group.process ">
+                   <!-- Opciones de Mensaje-->
+                </accordion-group>
+              </accordion>
+              </accordion-group>
+              </accordion>
+              <!--Tipos de Mensaje : Input-->
+            </accordion-group>
+          </accordion>
         </accordion-group>
       </accordion>
     </div>
@@ -91,10 +102,7 @@
     <nav class="navbar navbar-default">
       <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
     </nav>
-    
-   
- 
-     <div class="Grafo">
+    <div class="Grafo">
       <div id="mynetwork"></div>
       <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>--> 
     </div>
