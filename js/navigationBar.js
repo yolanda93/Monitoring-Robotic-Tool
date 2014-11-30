@@ -11,127 +11,129 @@ app.controller('processBrowser', function ($scope) {
 $scope.oneAtATime = true;
 
   $scope.groups = [
-                  {
-                    "module": "Mission_Planner",
-                  	"process":{"id":"1","Name":"Mission_Planner"},
-                  	"message":{"Name":"ActionConfirmation","Type":"Input"}                         	
+                    {
+                    "module": {"id":"1","Name":"Mission_Planner"},
+                    "process":{"id":"1","Name":"Mission_Planner"},
+                    "message":{"Name":"ActionConfirmation","Type":"Input"}                          
                   },
                   {
-                    "module":"Mission_Planner",
-                  	"process":{"id":"1", "Name": "Mission_Planner"},
-                  	"message":{"Name":"StateMapAbstraction", "Type":"Input"}                            	
+                    "module":{"id":"1","Name":"Mission_Planner"},
+                    "process":{"id":"1", "Name": "Mission_Planner"},
+                    "message":{"Name":"StateMapAbstraction", "Type":"Input"}                              
                   },
                   {
-                    "module":"Mission_Planner",
-                  	"process":{"id":"1", "Name":  "Mission_Planner"},
-                  	"message":{"Name":"ActionRequest","Type":"Input"}                               	
+                    "module":{"id":"1","Name":"Mission_Planner"},
+                    "process":{"id":"1", "Name":  "Mission_Planner"},
+                    "message":{"Name":"ActionRequest","Type":"Input"}                                 
                   },
                   {
-                  	"module": "Fligth_Controller",
-                  	"process": {"id":"2","Name":  "Fligth_Controller"},
-                  	"message":{"Name": "StateMapAbstraction","Type":"Input"}
+                    "module": {"id":"2","Name":"Fligth_Controller"},
+                    "process": {"id":"2","Name":  "Fligth_Controller"},
+                    "message":{"Name": "StateMapAbstraction","Type":"Input"}
                   },
                   {
-                  	"module": "Fligth_Controller",
-                  	"process":{"id":"2","Name":  "Fligth_Controller"},
-                  	"message":{"Name":"ActionRequest","Type":"Output"}
+                    "module": {"id":"2","Name":"Fligth_Controller"},
+                    "process":{"id":"2","Name":  "Fligth_Controller"},
+                    "message":{"Name":"ActionRequest","Type":"Output"}
                   },
                   {
-                  	"module": "Fligth_Controller",
-                  	"process": {"id":"2","Name":  "Fligth_Controller"},
-                  	"message":{"Name":"ActionConfirmation","Type":"Input"}
+                    "module": {"id":"2","Name":"Fligth_Controller"},
+                    "process": {"id":"2","Name":  "Fligth_Controller"},
+                    "message":{"Name":"ActionConfirmation","Type":"Input"}
                   },
                   {
-                  	"module": "Fligth_Controller",
-                  	"process": {"id":"2","Name": "Fligth_Controller"},
-                  	"message":{"Name":"FlightOrder","Type":"Input"}
+                    "module": {"id":"2","Name":"Fligth_Controller"},
+                    "process": {"id":"2","Name": "Fligth_Controller"},
+                    "message":{"Name":"FlightOrder","Type":"Input"}
                   },
                   {
-                  	"module": "Fligth_Controller",
-                  	"process": {"id":"3","Name":  "Pilot_Driver"},
-                  	"message":{"Name": "FlightOrder","Type":"Output"}
+                    "module": {"id":"2","Name":"Fligth_Controller"},
+                    "process": {"id":"3","Name":  "Pilot_Driver"},
+                    "message":{"Name": "FlightOrder","Type":"Output"}
                   },
                   {
-                  	"module": "Computer_Vision",
-                  	"process": {"id":"3","Name":  "Odometry_Driver"},
-                  	"message":{"Name":"OdometryChange","Type":"Output"}
+                    "module": {"id":"4","Name":"Device_Driver"},
+                    "process": {"id":"3","Name":  "Odometry_Driver"},
+                    "message":{"Name":"OdometryChange","Type":"Output"}
                   },           
                   {
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"4", "Name": "Camera_Driver"},
-                  	"message":{"Name": "RealImageOnFlight","Type":"Output"} 
+                    "module": {"id":"4","Name":"Device_Driver"},
+                    "process": {"id":"4", "Name": "Camera_Driver"},
+                    "message":{"Name": "RealImageOnFlight","Type":"Output"} 
                   },
                    {
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"5","Name":  "Camera_Processor"},
-                  	"message":{"Name": "RealImageOnFlight","Type":"Output"}
+                    "module":{"id":"4","Name":"Device_Driver"},
+                    "process": {"id":"5","Name":  "Camera_Processor"},
+                    "message":{"Name": "RealImageOnFlight","Type":"Output"}
                   },
                   {
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"5","Name":  "Camera_Processor"},
-                  	"message":{"Name": "CameraAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"Device_Driver"},
+                    "process": {"id":"5","Name":  "Camera_Processor"},
+                    "message":{"Name": "CameraAbstraction","Type":"Output"}
                   },
                    {
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"5","Name":  "Robot_Detector"},
-                  	"message":{"Name":"CameraFrameAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"Vision_System"},
+                    "process": {"id":"5","Name":  "Robot_Detector"},
+                    "message":{"Name":"CameraFrameAbstraction","Type":"Output"}
                   },
                    {              
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"5","Name":  "Robot_Detector"},
-                  	"message":{"Name":"GridStateAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"Vision_System"},
+                    "process": {"id":"5","Name":  "Robot_Detector"},
+                    "message":{"Name":"GridStateAbstraction","Type":"Output"}
                   },
                   {
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"5","Name": "Robot_Detector"},
-                  	"message":{"Name":"RobotStateAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"Vision_System"},
+                    "process": {"id":"5","Name": "Robot_Detector"},
+                    "message":{"Name":"RobotStateAbstraction","Type":"Output"}
                   },                  
                   {
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"6","Name":  "Robot_Detector"},
-                  	"message": {"Name":"UAVPositionChange","Type":"Output"}
+                    "module":{"id":"4","Name":"Vision_System"},
+                    "process": {"id":"6","Name":  "Robot_Detector"},
+                    "message": {"Name":"UAVPositionChange","Type":"Output"}
                   },
                   {
-                  	"module":"Computer_Vision",
-                  	"process":{"id":"7","Name":  "Grid_Detector"},
-                  	"message": {"Name":"GridStateAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"Vision_System"},
+                    "process":{"id":"7","Name":  "Grid_Detector"},
+                    "message": {"Name":"GridStateAbstraction","Type":"Output"}
                   },
                   {
-                  	"module":"Computer_Vision",
-                  	"process": {"id":"7","Name":  "Grid_Detector"},
-                  	"message": {"Name": "CameraFrameAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"Vision_System"},
+                    "process": {"id":"7","Name":  "Grid_Detector"},
+                    "message": {"Name": "CameraFrameAbstraction","Type":"Output"}
                   },
                   {
-                  	"module": "Computer_Vision",
-                  	"process": {"id":"8","Name":  "State_Map_Estimator"},
-                  	"message":{"Name": "RobotStateAbstraction","Type":"Output"}
+                    "module": {"id":"5","Name":"State_Map_Estimator"},
+                    "process": {"id":"8","Name":  "State_Map_Estimator"},
+                    "message":{"Name": "RobotStateAbstraction","Type":"Output"}
                   },
                   {
-                  	"module": "Computer_Vision",
-                  	"process": {"id":"8","Name":  "State_Map_Estimator"},
-                  	"message":{"Name": "GridStateAbstraction","Type":"Output"}
+                    "module": {"id":"5","Name":"State_Map_Estimator"},
+                    "process": {"id":"8","Name":  "State_Map_Estimator"},
+                    "message":{"Name": "GridStateAbstraction","Type":"Output"}
                   },
                   {
-                  	"module": "Computer_Vision",
-                  	"process": {"id":"8","Name":  "State_Map_Estimator"},
-                  	"message":{"Name":"StateMapAbstraction","Type":"Output"}
+                    "module": {"id":"5","Name":"State_Map_Estimator"},
+                    "process": {"id":"8","Name":  "State_Map_Estimator"},
+                    "message":{"Name":"StateMapAbstraction","Type":"Output"}
                   },               
                   {
-                  	"module": "Computer_Vision",
-                  	"process":{"id":"9","Name":  "Pose_Estimator"}, 
-                  	"message":{"Name":"GridStateAbstraction","Type":"Output"}
+                    "module": {"id":"5","Name":"State_Map_Estimator"},
+                    "process":{"id":"9","Name":  "Pose_Estimator"}, 
+                    "message":{"Name":"GridStateAbstraction","Type":"Output"}
                   },
                   {
-                  	"module": "Computer_Vision",
-                  	"process": {"id":"9", "Name": "Pose_Estimator"}, 
-                  	"message":{"Name":"OdometryChange","Type":"Output"}
+                    "module": {"id":"6","Name":"Pose_Estimator"},
+                    "process": {"id":"9", "Name": "Pose_Estimator"}, 
+                    "message":{"Name":"OdometryChange","Type":"Output"}
                   },
                   {
-                  	"module": "Computer_Vision",
-                  	"process": {"id":"9", "Name": "Pose_Estimator"}, 
-                  	"message":{"Name":"UAVPositionChange","Type":"Output"}
+                    "module": {"id":"6","Name":"Pose_Estimator"},
+                    "process": {"id":"9", "Name": "Pose_Estimator"}, 
+                    "message":{"Name":"UAVPositionChange","Type":"Output"}
                   }
               ];
+
+              console.log($scope.groups);
 
   $scope.navigation = {"targetModule":"module",
                        "parentModule":"#side-navigation",
@@ -150,6 +152,7 @@ $scope.oneAtATime = true;
     $event.stopPropagation();
     $scope.status.isopen = !$scope.status.isopen;
   };
+
 });
 
 

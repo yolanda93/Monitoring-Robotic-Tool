@@ -14,7 +14,6 @@
 <script type="text/javascript" src="js/ui-utils.js"></script>
 <script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.0.min.js"></script>
 <script type="text/javascript" src="js/navigationBar.js"></script>
-
 <style type="text/css">
 #mynetwork {
 	width: auto;
@@ -76,8 +75,9 @@
 <div class="row">
   <div class="container-fluid">
     <div class="col-lg-2 col-md-2 col-sm-2 ">
+    <div ><th>Uav Status/th></div>
       <div class="hidden-xs"> <img src="imagenes/uavFoto.jpg" class="img-responsive" width="317" height="189" alt="uavFoto" > </div>
-      <div class="table-responsive">     
+      <div class="table-responsive">
         <table id="table" class="table table-bordered table-condensed" >
           <tbody>
             <tr>
@@ -120,22 +120,11 @@
       <!--Left navigation bar -->
       <div ng-controller="processBrowser" >
         <ul class="nav nav-sidenav">
-          <li class="sixth"  ng-repeat="group in groups | orderBy:'module.Name' | unique:'module.Name'" > <a href="#" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation">{{ group.module.Name}}</a>
-            <ul class="collapse" id="{{group.module.Name}}id">
-              <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module.Name | unique:'process' "><a href="#" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >{{group.process.Name}}</a>
+          <li class="sixth"  ng-repeat="group in groups | orderBy:'module' | unique:'module'" > <a href="#" data-toggle="collapse" data-target="#{{group.module}}id" data-parent="#side-navigation">{{ group.module}}</a>
+            <ul class="collapse" id="{{group.module}}id">
+              <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module | unique:'process' "><a href="#" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >{{group.process.Name}}</a>
                 <ul class="collapse" id="{{group.process.Name}}" + "{{group.process.id}}">
-                  <li  ng-repeat="group in groups | orderBy:'message.Name' | filter: group.process.Name"  data-toggle="collapse" data-target="#{{group.message.Name}}" ><a href="#">{{group.message.Name}}::{{group.message.Type}}</a>  
-                  <ul class="collapse" id="{{group.message.Name}}"><li  data-toggle="collapse" data-target="#options+{{group.message.Name}}" >
-                  <li> <a href="#">Options Topic1</a></li>
-                  <li> <a href="#">Options Topic2</a></li>
-                  <li> <a href="#">Options Topic3</a></li>
-                  <li> <a href="#">Options Topic4</a></li>
-                  <li> <a href="#">Options Topic5</a></li>
-                   
-                 
-                  </ul>
-
-                   </li>
+                  <li  ng-repeat="group in groups | orderBy:'message.Name' | filter: group.process.Name"><a href="#">{{group.message.Name}}</a> </li>
                 </ul>
               </li>
             </ul>
@@ -143,10 +132,9 @@
         </ul>
       </div>
       <!--End left navigation bar --> 
-
     </div>
     <!--End left column grid -->
-
+    
     <div class="col-lg-10 col-md-10 col-sm-10">
       <nav class="navbar navbar-default">
         <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
@@ -226,10 +214,9 @@ var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-722
 	  };
   var network = new vis.Network(canvas, data, options); 
 
-//network.on('select', function (properties) {
-//  alert('Se ha seleccionado el proceso: ' + properties.nodes);
-//});
-
+network.on('select', function (properties) {
+  alert('Se ha seleccionado el proceso: ' + properties.nodes);
+});
 }
 
 
