@@ -20,101 +20,137 @@
 	height: auto;
 	border: 1px solid lightgray;
 }
-.accordion-heading .my_heading_accordion {
-	color: red;
-	font-size: 3em;
+.bold {
+	font-weight: bold;
+}
+.nav-sidenav ul {
+	list-style: none;
+	padding: 0px;
+}
+.nav-sidenav > li.first {
+	border-left: 5px solid #a58fc4;
+}
+.nav-sidenav > li.second {
+	border-left: 5px solid #58c5c7;
+}
+.nav-sidenav > li.third {
+	border-left: 5px solid #915f13;
+}
+.nav-sidenav > li.fourth {
+	border-left: 5px solid #b6cf2f;
+}
+.nav-sidenav > li.fifth {
+	border-left: 5px solid #fdb731;
+}
+.nav-sidenav > li.sixth {
+	border-left: 5px solid #00aef0;
+}
+.nav-sidenav li.divider {
+	border-bottom: 1px solid #e6e6e6;
+}
+.nav-sidenav > li {
+	margin: 1px 0px;
+}
+.nav-sidenav > li.sidenav-active-background {
+	background-color: #e6e6e6;
+}
+.nav-sidenav li a {
+	color: #4d4d4f;
+	display: block;
+	text-decoration: none;
+	outline: none;
+}
+.nav-sidenav li li a {
+	padding: 5px 25px;
+}
+.nav-sidenav li li li a {
+	padding: 5px 35px;
+}
+.nav-sidenav li a:hover, .nav-sidenav li a:focus {
+	background-color: #d1d1d1;
 }
 </style>
 </head>
 <body  onload="draw()">
 <div class="row">
-<div class="container-fluid">
-  <div class="col-lg-2 col-md-2 col-sm-2 ">
-    <div class="hidden-xs"> <img src="imagenes/uavFoto.jpg" class="img-responsive" width="317" height="189" alt="uavFoto" > </div>
-    <div class="table-responsive">
-      <table id="table" class="table table-bordered table-condensed" >
-        <tbody>
-          <tr>
-            <th>Battery</th>
-            <td>65%</td>
-          </tr>
-          <tr>
-            <th>STATE</th>
-            <td>OK</td>
-          </tr>
-          <tr>
-            <th>Wing Front</th>
-            <td>653 rpm</td>
-          </tr>
-          <tr>
-            <th>Wing left</th>
-            <td>720 rpm</td>
-          </tr>
-          <tr>
-            <th>Wing Rigth</th>
-            <td>720 rpm</td>
-          </tr>
-          <tr>
-            <th>Wing Back</th>
-            <td>720 rpm</td>
-          </tr>
-          <tr>
-            <th>Position</th>
-            <td>(3.2,4.2,1.5)</td>
-          </tr>
-          <tr>
-            <th>Wifi-Connection</th>
-            <td>95%</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="container-fluid">
+    <div class="col-lg-2 col-md-2 col-sm-2 ">
+      <div class="hidden-xs"> <img src="imagenes/uavFoto.jpg" class="img-responsive" width="317" height="189" alt="uavFoto" > </div>
+      <div class="table-responsive">
+        <table id="table" class="table table-bordered table-condensed" >
+          <tbody>
+            <tr>
+              <th>Battery</th>
+              <td>65%</td>
+            </tr>
+            <tr>
+              <th>STATE</th>
+              <td>OK</td>
+            </tr>
+            <tr>
+              <th>Wing Front</th>
+              <td>653 rpm</td>
+            </tr>
+            <tr>
+              <th>Wing left</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Wing Rigth</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Wing Back</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Position</th>
+              <td>(3.2,4.2,1.5)</td>
+            </tr>
+            <tr>
+              <th>Wifi-Connection</th>
+              <td>95%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--End tabla con info del UAV --> 
+      
+      <!--Left navigation bar -->
+      <div ng-controller="processBrowser" >
+        <ul class="nav nav-sidenav">
+          <li class="sixth"  ng-repeat="group in groups | orderBy:'module' | unique:'module'" > <a href="#" data-toggle="collapse" data-target="#{{group.module}}id" data-parent="#side-navigation">{{ group.module}}</a>
+            <ul class="collapse" id="{{group.module}}id">
+              <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module | unique:'process' "><a href="#" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >{{group.process.Name}}</a>
+                <ul class="collapse" id="{{group.process.Name}}" + "{{group.process.id}}">
+                  <li  ng-repeat="group in groups | orderBy:'message.Name' | filter: group.process.Name"><a href="#">{{group.message.Name}}::{{group.message.Type}}</a> </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!--End left navigation bar --> 
     </div>
-    <!--End tabla con info del UAV --> 
+    <!--End left column grid -->
     
-    <!--Left navigation bar -->
-    <div ng-controller="processBrowser">
-      <accordion close-others="oneAtATime">
-        <accordion-group  heading="{{group.module}}" ng-repeat="group in groups | orderBy:'module' | unique:'module' " >
-          <accordion close-others="oneAtATime">
-            <accordion-group heading="{{group.process}}" ng-repeat="group in groups | orderBy:'process' | filter: group.module | unique:'process' " >
-               <!--Tipos de Mensaje : Input-->
-               <accordion close-others="oneAtATime">
-              <accordion-group heading="{{group.message.Type}}"  ng-repeat="group in groups | orderBy:'Type'  | filter: group.process | unique:'Type' ">
-              <accordion close-others="oneAtATime">
-                <accordion-group heading="{{group.message.Name}}" ng-repeat="group in groups | orderBy:'message.Name' | filter: group.process ">
-                   <!-- Opciones de Mensaje-->
-                </accordion-group>
-              </accordion>
-              </accordion-group>
-              </accordion>
-              <!--Tipos de Mensaje : Input-->
-            </accordion-group>
-          </accordion>
-        </accordion-group>
-      </accordion>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
+      </nav>
+      <div class="Grafo">
+        <div id="mynetwork"></div>
+        <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>--> 
+      </div>
+      <!--End main central grid--> 
+      
+      <!--End right column grid --> 
+      
     </div>
-    
-    <!--End left navigation bar --> 
+    <!--End container--> 
   </div>
-  <!--End left column grid -->
-  
-  <div class="col-lg-10 col-md-10 col-sm-10">
-    <nav class="navbar navbar-default">
-      <div class="navbar-header"> <a class="navbar-brand" href="#">barra de herramientas</a> </div>
-    </nav>
-    <div class="Grafo">
-      <div id="mynetwork"></div>
-      <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>--> 
-    </div>
-    <!--End main central grid--> 
-    
-    <!--End right column grid --> 
-    
-  </div>
-  <!--End container--> 
+  <!--End row--> 
 </div>
-<!--End row--> 
-
 <script type="text/javascript">
 var nodes = null;
 var edges = null;
