@@ -12,7 +12,7 @@ $scope.oneAtATime = true;
 
   $scope.groups = [
                     {
-                    "module": {"id":"1","Name":"Mission_Planner"},
+                    "module": {"id":"1","Name":"Mission_Planner2s"},
                     "process":{"id":"1","Name":"Mission_Planner"},
                     "message":{"Name":"ActionConfirmation","Type":"Input"}                          
                   },
