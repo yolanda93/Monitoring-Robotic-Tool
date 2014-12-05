@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html ng-app="faultManagementApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Fault Management System</title>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.min.css">
+<link rel="sylesheet" href="css/bootstrap-3.3.1-dist/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/vis/vis.css">
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/vis/vis.js"></script>
+<script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/ui-utils.js"></script>
+<script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+<script type="text/javascript" src="app/appCtrl.js"></script>
+
+<style type="text/css">
+.bold {
+  font-weight: bold;
+}
+.nav-sidenav ul {
+  list-style: none;
+  padding: 0px;
+}
+.nav-sidenav > li.sixth {
+border-left: 5px solid #99CCFF;
+}
+.nav-sidenav li.divider {
+  border-bottom: 1px solid #e6e6e6;
+}
+.nav-sidenav > li {
+  margin: 1px 0px;
+}
+.nav-sidenav > li.sidenav-active-background {
+  background-color: #e6e6e6;
+    border-left: 5px solid #00aef0;
+}
+.nav-sidenav li a {
+  color: #4d4d4f;
+  display: block;
+  text-decoration: none;
+  font-size: 11px;
+  outline: none;
+  background-color:#f8f8f8; 
+}
+.nav-sidenav li li a {
+  padding: 5px 25px;
+}
+.nav-sidenav li li li a {
+  padding: 5px 35px;
+}
+.nav-sidenav li a:hover, .nav-sidenav li a:focus {
+	background-color: #99CCCC;
+	border-left: 5px solid #99CCFF;
+	font-size: 12px;
+}
+</style>
+</head>
+<body ng-controller="appCtrl">
+<div class="row-fluid">
+  <div class="container-fluid">
+  <div class="col-lg-12 col-md-12 col-sm-12 ">  
+        <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0; background-color:#fff;border-color: #99CCFF;">
+        <div class="container-fluid"> 
+        <div class="col-lg-2 col-md-2 col-sm-2 ">
+         <img src="imagenes/logo.png" alt="grafoArquitectura" class="img-responsive" width="317" height="67" />
+         </div> 
+          <!-- Debug Console-->
+          <div class="navbar-header">
+           <div style="padding-left: 4cm">
+            <ul class="nav navbar-nav">
+              <div class="active">
+                <li>Debug Console</li>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>  
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>                
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></button>
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </ul>
+          </div>
+          </div> 
+          <!-- Debug Console-->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!-- View Panel-->
+            <ul class="nav navbar-nav navbar-inner" style="padding-left: 8cm; margin-top: 0.15cm; ">
+               <li class="divider-vertical"></li>
+              <li class="dropdown"> <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View Panel<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">UAV Status</a></li>
+                  <li><a href="#">Error Status</a></li>
+                  <li><a href="#">Debug</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Scence Viewer</a></li>
+                </ul>
+              </li>
+               <li class="divider-vertical"></li>
+            </ul>
+            <!-- View Panel-->
+            <!-- File Load-->
+              <ul class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span></button>  
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>               
+              </ul>         
+               <!-- File Load -->      
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid --> 
+      </nav>
+    <div class="col-lg-2 col-md-2 col-sm-2 ">     
+      <!--Left navigation bar -->
+     <div>
+        <ul class="nav nav-sidenav"  ng-controller="browserViewer">
+          <li class="sixth"  ng-repeat="group in groups | orderBy:'module.Name' | unique:'module.Name'" > <a ng-href="#" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation" ng-click="controlViewer('{{group.module.Name}}')">{{ group.module.Name}}</a>
+            <ul class="collapse" id="{{group.module.Name}}id">
+              <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module.Name | unique:'process.Name' "><a href="#" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >{{group.process.Name}}</a>
+                <ul class="collapse" id="{{group.process.Name}}" + "{{group.process.id}}">
+                  <li  ng-repeat="group in groups | orderBy:'message.Name' | filter: group.process.Name |  unique:'message.Name'"  data-toggle="collapse" data-target="#{{group.message.Name}}" ><a href="#">{{group.message.Name}}::{{group.message.Type}}</a>  
+                   </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!--End left navigation bar --> 
+       <div class="panel panel-default">
+       <div class="panel-heading">UAV State</div>
+       <div class="panel-body">
+        <div class="table-responsive">     
+        <table id="table" class="table table-bordered table-condensed" >
+          <tbody>
+            <tr>
+              <th>Battery</th>
+              <td>65%</td>
+            </tr>
+            <tr>
+              <th>STATE</th>
+              <td>OK</td>
+            </tr>
+            <tr>
+              <th>Wing Front</th>
+              <td>653 rpm</td>
+            </tr>
+            <tr>
+              <th>Wing left</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Wing Rigth</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Wing Back</th>
+              <td>720 rpm</td>
+            </tr>
+            <tr>
+              <th>Position</th>
+              <td>(3.2,4.2,1.5)</td>
+            </tr>
+            <tr>
+              <th>Wifi-Connection</th>
+              <td>95%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       </div>
+      </div>
+    </div>
+    <!--End left column grid -->
+    
+    <div class="col-lg-10 col-md-10 col-sm-10">
+      <div class="panel panel-default"  style="height: 600px;">
+            <div class="panel-heading">Process Graph</div>
+             <div class="Grafo">
+               <div id="mynetwork">       
+             </div>
+            <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>-->
+         </div>  
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Message Details</div>
+            <div class="panel-body">
+             Info Message........,......<br>............................................................................<br>.................<br>..................<br>.........<br>...........<br>............<br>..........<br>............................<br>.....................................<br>...........<br>................<br>............<br>.......................<br>............................................................................<br>.................<br>..................<br>.........<br>...........<br>............<br>..........<br>............................<br>.....................................<br>...........<br>................<br>............<br>..............
+            </div>
+         </div> 
+      </div> 
+
+         
+       </div> 
+      <!--End main central grid--> 
+      
+        <!--<img src="imagenes/ImagenGrafo.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>--> 
+      </div>
+      </div>
+      <!--End right column grid --> 
+      
+    <!--End container--> 
+   </div>
+  </div>
+  <!--End row--> 
+  <div id="wrap">
+  <div class="footer">
+    <p>ETS de Ingenierios Informáticos :: Universidad Politécnica de Madrid.</p>
+    <p>Departamento de Inteligencia Artificial - Laboratorio de Sistemas Inteligentes e Ingeniería del Conocimiento. 
+      <!-- end .footer --></p>
+  </div>
+</div>
+</div>
+
+  
+</body>
+</html>

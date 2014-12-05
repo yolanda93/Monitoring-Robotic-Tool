@@ -1931,7 +1931,7 @@ th {
 }
 .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
 	border: 1px solid #ddd;
-	font-size: 9px;
+	font-size: 12px;
 	margin-bottom: 0px;
 }
 .table-bordered>thead>tr>th, .table-bordered>thead>tr>td {
@@ -5394,4 +5394,11 @@ th.visible-print, td.visible-print {
 }
 .row .container-fluid .col-lg-2.col-md-2.col-sm-2 .mycontainer .left-nav accordion accordion-group {
 	font-size: 9px;
+}
+#wrap .footer {
+	background-color: #69F;
+	font-size: 14px;
+	color: #FFF;
+	vertical-align: middle;
+	text-align: center;
 }
