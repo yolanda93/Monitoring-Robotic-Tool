@@ -52,11 +52,14 @@ border-left: 5px solid #4169E1;
   padding: 5px 35px;
 }
 .navbar-default li a:hover, .navbar-default li a:focus {
-    background-color: #ADD8E6;
-    border-left: 5px solid #99CCFF;
-    font-size: 15px;
+	background-color: #ADD8E6;
+	border-left: 5px solid #99CCFF;
+	/* [disabled]font-size: 15px; */
 }
 
+.navbar.navbar-default.navbar-static-top .navbar-default.sidebar #side-menu .fa.fa-bar-chart-o.fa-fw a .glyphicon.glyphicon-chevron-right {
+	margin-right: 8px;
+}
 </style>
 </head>
 
@@ -67,7 +70,8 @@ border-left: 5px solid #4169E1;
          <ul class="nav navbar-top-links navbar-right" ><li><img src="imagenes/UPMlogo.png" class="img-responsive" width="100" style="margin-left: 6cm" /></li></ul>
   <div class="navbar-header"> <a class="navbar-brand" href="index.html"  style="margin-bottom: 1cm">Fault Management System 
   </a> 
-  <ul class="nav nav-tabs">
+
+  <ul class="nav nav-tabs nav-justified"  style="margin-left: 0.2cm">
     <li role="presentation"><a href="#">Record</a></li>
     <li role="presentation" class="active"><a href="#">Debug </a></li> 
   </ul>
@@ -93,23 +97,9 @@ border-left: 5px solid #4169E1;
   <div class="row" >
     <div class="panel panel-default"  style="margin-top: 0.5cm" >
       <div class="panel-heading"> <i class="fa fa-bar-chart-o fa-fw"></i> Process Graph 
-        <!-- Buttor Right  -->
-        <div class="pull-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> Actions <span class="caret"></span> </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-              <li><a href="#">Action</a> </li>
-              <li><a href="#">Another action</a> </li>
-              <li><a href="#">Something else here</a> </li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a> </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Buttor Right  --> 
       </div>
       <div class="panel-body">
-       <img src="imagenes/ImagenGrafo.png" class="img-responsive" width="1517" height="189" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div> 
+       <img src="imagenes/ImagenGrafoF.png" class="img-responsive" width="1517" height="189" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div> 
       <!--<div id="mynetwork"></div>--> 
     </div>
     <div class="panel panel-default"  style="margin-top: 0.5cm" >
@@ -142,16 +132,8 @@ border-left: 5px solid #4169E1;
 <!-- jQuery --> 
 <script src="js/jquery.js"></script> 
 
-<!-- Bootstrap Core JavaScript --> 
-<script src="js/bootstrap.min.js"></script> 
-
 <!-- Metis Menu Plugin JavaScript --> 
 <script src="js/plugins/metisMenu/metisMenu.min.js"></script> 
-
-<!-- Morris Charts JavaScript --> 
-<script src="js/plugins/morris/raphael.min.js"></script> 
-<script src="js/plugins/morris/morris.min.js"></script> 
-<script src="js/plugins/morris/morris-data.js"></script> 
 
 <!-- Custom Theme JavaScript --> 
 <script src="js/sb-admin-2.js"></script>
