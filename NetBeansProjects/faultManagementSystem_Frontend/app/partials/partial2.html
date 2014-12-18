@@ -99,6 +99,25 @@ border-left: 5px solid #4169E1;
         </div>
         <!-- Buttor Right  --> 
       </div>
+        <table>
+    <thead>
+        <tr>
+            <th>
+                message
+            </th>
+        </tr>
+        <tr ng-repeat="message in allMessage">
+            <td>{{message.content}}</td>
+        </tr>
+        <tr>
+            <th>
+                message
+            </th>
+        </tr>
+        <tr ng-repeat="message in allMessage">
+            <td>{{message.id}}</td>
+        </tr>
+</table>
       <div class="panel-body">
        
       <!--<div id="mynetwork"></div>--> 

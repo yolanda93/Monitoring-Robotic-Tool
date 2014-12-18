@@ -1,29 +1,59 @@
 angular.module('myApp.controllers',['ui.bootstrap','ui.utils'])
-.controller('MyCtrl1',function($scope,message){
-   $scope.allMessage= message.findAll();  
- })
 
-.controller('appCtrl',function($scope){
+.controller('appCtrl',function($scope,message,processGroup,process,topic){
     
- //processGraph_draw();
+//var graph = processGraph_draw();
+$scope.allMessage= message.findAll();
 processBrowser_init($scope);
+ 
 
+ $scope.showMessages =function(name){
+      $scope.view = 'message';
+      $scope.selectedMessage=message;     
+      var message = document.getElementsByTagName("message");
+      console.log("Se ha seleccionado el topic "+ name);
+  };
+  
+  $scope.changeSystemViewer =function(groupName){
+   /*  console.log("Se ha seleccionado el sistema "+ groupName.Name +" con identificador "+ groupName.id + "procesos: " +  groupName.Name.process.id);  
+     
+     
+      idsProcess= [];
+      for (var i = 0; i <= groupName.Name.process.length; i++) {
+      idsProcess.push(groupName.process[i].id); 
+       console.log(groupName.process[i].id);
+   }*/
+     /*var pos = graph.getPositions(groupName.id);
+     console.log("DestinoX " + pos[groupName.id].x);
+     console.log("DestinoY " + pos[groupName.id].y);
+     var center = graph.getCenterCoordinates();
+     console.log("Center: " + "posX: "+ center.x + " posY: " + center.y);
+      var options={
+       scale:'0.7',
+       offset:{x:0, y:0}
+      };
+     graph.focusOnNode(groupName.id,options);*/
+  };
+  
+  $scope.changeProcessViewer =function(processName){
+     /*console.log("Se ha seleccionado el sistema "+ processName.Name +"con identificador "+ processName.id);  
+      var options={
+       scale:'0.7',
+       offset:{x:0, y:0}
+      };
+     graph.focusOnNode(processName.id,options);*/
+  };
+  
+  $scope.resize =function(){
+     /*console.log("Resize ");  
+     graph.zoomExtent();*/
+ };
 
+ 
 })
 
 
 
-.controller('browserViewer', function ($scope) {
-console.log("controlador de browserViewer ");
-
-// ng-click user
- $scope.controlViewer =function (name) {
-      console.log(name);
-
-      alert("Se ha seleccionado system"+ name.value);
-  };
-
-});
 
 
 function processBrowser_init(browser_data){ 
@@ -31,121 +61,116 @@ function processBrowser_init(browser_data){
 browser_data.oneAtATime = true;
 
 // Call to factory request to get modules, process and topics.
-/*
-
-
-
-*/
-
+/**/
 browser_data.groups = [
                   {
-                    "module":{"id":"1","Name":"Mission_Planner"},
-                    "process":{"id":"1", "Name": "Mission_Planner"},
-                    "message":{"Name":"StateMapAbstraction", "Type":"Input"}                              
+                    "module":{"id":"1","Name":"missionPlanner"},
+                    "process":{"id":"1", "Name": "missionPlanner"},
+                    "message":{"Name":"stateMapAbstraction", "Type":"Input"}                              
                   },
                   {
-                    "module":{"id":"1","Name":"Mission_Planner"},
-                    "process":{"id":"1", "Name":  "Mission_Planner"},
-                    "message":{"Name":"ActionRequest","Type":"Input"}                                 
+                    "module":{"id":"1","Name":"missionPlanner"},
+                    "process":{"id":"1", "Name":  "missionPlanner"},
+                    "message":{"Name":"actionRequest","Type":"Input"}                                 
                   },
                   {
-                    "module": {"id":"2","Name":"Fligth_Controller"},
-                    "process": {"id":"2","Name":  "Fligth_Controller"},
-                    "message":{"Name": "StateMapAbstraction","Type":"Input"}
+                    "module": {"id":"2","Name":"fligthController"},
+                    "process": {"id":"2","Name": "fligthController"},
+                    "message":{"Name": "stateMapAbstraction","Type":"Input"}
                   },
                   {
-                    "module": {"id":"2","Name":"Fligth_Controller"},
-                    "process":{"id":"2","Name":  "Fligth_Controller"},
-                    "message":{"Name":"ActionRequest","Type":"Output"}
+                    "module": {"id":"2","Name":"fligthController"},
+                    "process":{"id":"2","Name": "fligthController"},
+                    "message":{"Name":"actionRequest","Type":"Output"}
                   },
                   {
-                    "module": {"id":"2","Name":"Fligth_Controller"},
-                    "process": {"id":"2","Name":  "Fligth_Controller"},
-                    "message":{"Name":"ActionConfirmation","Type":"Input"}
+                    "module": {"id":"2","Name":"fligthController"},
+                    "process": {"id":"2","Name":  "fligthController"},
+                    "message":{"Name":"actionConfirmation","Type":"Input"}
                   },
                   {
-                    "module": {"id":"2","Name":"Fligth_Controller"},
-                    "process": {"id":"2","Name": "Fligth_Controller"},
-                    "message":{"Name":"FlightOrder","Type":"Input"}
+                    "module": {"id":"2","Name":"fligthController"},
+                    "process": {"id":"2","Name": "fligthController"},
+                    "message":{"Name":"flightOrder","Type":"Input"}
                   },
                   {
-                    "module": {"id":"2","Name":"Fligth_Controller"},
-                    "process": {"id":"3","Name":  "Pilot_Driver"},
-                    "message":{"Name": "FlightOrder","Type":"Output"}
+                    "module": {"id":"2","Name":"fligthController"},
+                    "process": {"id":"3","Name":  "pilotDriver"},
+                    "message":{"Name": "flightOrder","Type":"Output"}
                   },
                   {
-                    "module": {"id":"3","Name":"Device_Driver"},
-                    "process": {"id":"3","Name":  "Odometry_Driver"},
-                    "message":{"Name":"OdometryChange","Type":"Output"}
+                    "module": {"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"4","Name":  "odometryDriver"},
+                    "message":{"Name":"odometryChange","Type":"Output"}
                   },           
                   {
-                    "module": {"id":"3","Name":"Device_Driver"},
-                    "process": {"id":"4", "Name": "Camera_Driver"},
-                    "message":{"Name": "RealImageOnFlight","Type":"Output"} 
+                    "module": {"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"5", "Name": "cameraDriver"},
+                    "message":{"Name": "realImageOnFlight","Type":"Output"} 
                   },
                    {
-                    "module":{"id":"3","Name":"Device_Driver"},
-                    "process": {"id":"5","Name":  "Camera_Processor"},
-                    "message":{"Name": "RealImageOnFlight","Type":"Output"}
+                    "module":{"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"6","Name":  "cameraProcessor"},
+                    "message":{"Name": "realImageOnFlight","Type":"Output"}
                   },
                   {
-                    "module":{"id":"3","Name":"Device_Driver"},
-                    "process": {"id":"5","Name":  "Camera_Processor"},
-                    "message":{"Name": "CameraAbstraction","Type":"Output"}
+                    "module":{"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"6","Name":  "cameraProcessor"},
+                    "message":{"Name": "cameraAbstraction","Type":"Output"}
                   },
                    {
-                    "module":{"id":"4","Name":"Vision_System"},
-                    "process": {"id":"5","Name":  "Robot_Detector"},
-                    "message":{"Name":"CameraFrameAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"visionSystem"},
+                    "process": {"id":"7","Name":  "robotDetector"},
+                    "message":{"Name":"cameraAbstraction","Type":"Output"}
                   },
                    {              
-                    "module":{"id":"4","Name":"Vision_System"},
-                    "process": {"id":"5","Name":  "Robot_Detector"},
-                    "message":{"Name":"GridStateAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"visionSystem"},
+                    "process": {"id":"7","Name":  "robotDetector"},
+                    "message":{"Name":"gridStateAbstraction","Type":"Output"}
                   },
                   {
-                    "module":{"id":"4","Name":"Vision_System"},
-                    "process": {"id":"5","Name": "Robot_Detector"},
-                    "message":{"Name":"RobotStateAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"visionSystem"},
+                    "process": {"id":"7","Name": "robotDetector"},
+                    "message":{"Name":"robotStateAbstraction","Type":"Output"}
                   },                  
                   {
-                    "module":{"id":"4","Name":"Vision_System"},
-                    "process": {"id":"6","Name":  "Robot_Detector"},
+                    "module":{"id":"4","Name":"visionSystem"},
+                    "process": {"id":"7","Name":  "robotDetectorr"},
                     "message": {"Name":"UAVPositionChange","Type":"Output"}
                   },
                   {
-                    "module":{"id":"4","Name":"Vision_System"},
-                    "process":{"id":"7","Name":  "Grid_Detector"},
-                    "message": {"Name":"GridStateAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"visionSystem"},
+                    "process":{"id":"8","Name":  "gridDetector"},
+                    "message": {"Name":"gridStateAbstraction","Type":"Output"}
                   },
                   {
-                    "module":{"id":"4","Name":"Vision_System"},
-                    "process": {"id":"7","Name":  "Grid_Detector"},
-                    "message": {"Name": "CameraFrameAbstraction","Type":"Output"}
+                    "module":{"id":"4","Name":"visionSystem"},
+                    "process": {"id":"8","Name":  "gridDetector"},
+                    "message": {"Name": "cameraFrameAbstraction","Type":"Output"}
                   },
                   {
-                    "module": {"id":"5","Name":"State_Map_Estimator"},
-                    "process": {"id":"8","Name":  "State_Map_Estimator"},
-                    "message":{"Name": "RobotStateAbstraction","Type":"Output"}
+                    "module": {"id":"5","Name":"stateMapEstimator"},
+                    "process": {"id":"9","Name":  "stateMapEstimator"},
+                    "message":{"Name": "robotStateAbstraction","Type":"Output"}
                   },
                   {
-                    "module": {"id":"5","Name":"State_Map_Estimator"},
-                    "process": {"id":"8","Name":  "State_Map_Estimator"},
-                    "message":{"Name": "GridStateAbstraction","Type":"Output"}
+                    "module": {"id":"5","Name":"stateMapEstimator"},
+                    "process": {"id":"9","Name":  "stateMapEstimator"},
+                    "message":{"Name": "gridStateAbstraction","Type":"Output"}
                   },
                   {
-                    "module": {"id":"5","Name":"State_Map_Estimator"},
-                    "process": {"id":"8","Name":  "State_Map_Estimator"},
-                    "message":{"Name":"StateMapAbstraction","Type":"Output"}
+                    "module": {"id":"5","Name":"stateMapEstimator"},
+                    "process": {"id":"9","Name":  "stateMapEstimator"},
+                    "message":{"Name":"stateMapAbstraction","Type":"Output"}
                   },               
                   {
-                    "module": {"id":"6","Name":"Pose_Estimator"},
-                    "process": {"id":"9", "Name": "Pose_Estimator"}, 
-                    "message":{"Name":"OdometryChange","Type":"Output"}
+                    "module": {"id":"6","Name":"poseEstimator"},
+                    "process": {"id":"9", "Name": "poseEstimator"}, 
+                    "message":{"Name":"odometryChange","Type":"Output"}
                   },
                   {
-                    "module": {"id":"6","Name":"Pose_Estimator"},
-                    "process": {"id":"9", "Name": "Pose_Estimator"}, 
+                    "module": {"id":"6","Name":"poseEstimator"},
+                    "process": {"id":"9", "Name": "poseEstimatorr"}, 
                     "message":{"Name":"UAVPositionChange","Type":"Output"}
                   }
               ];
@@ -171,7 +196,7 @@ var network = null;
 var origin = [2,2,1,9,9,7,8,10,4,5,6,6,7,8];
 var destination = [3,1,2,1,2,9,10,8,10,6,8,7,8,9];
 var messages = ['FlightOrder', 'ActionConfirmation', 'ActionRequest', 'StateMapAbstraction','StateMapAbstraction','RobotStateAbstraction', 'GridStateAbstraction','UAVPositionChange', 'OdometryChange', 'RealImageOnFligth','CameraFrameAbstraction','CameraFrameAbstraction','GridStateAbstraction','GridStateAbstraction'];
-var process = ['   Mission Planner   ','   Fligth Controller   ', '       Pilot Driver       ','  Odometry Driver  ','  Camera Driver  ','Camera Processor','  Robot Detector  ', '    Grid Detector    ','State Map Estimator','   Pose Estimator  '];
+var process = ['   Mission Planner   ','   Fligth Controller   ', '       Pilot Driver       ','  Odometry Driver  ','  Camera Driver  ','Camera Processor','  Robot Detector  ', '    Grid Detector    ','State Map Estimator ','   Pose Estimator  '];
 // adjuntar SVG y sacar los puntos accediendo al DOM.
 
 var pointX = [24364.9,28711.9,31942.9,10405.9,1067.92,5362.92,14818.9,10405.9,19631.9,14818.9];
@@ -220,7 +245,7 @@ var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-722
   var tamanoHPx= tamanoH + 'px' 
   console.log(screen.height);
   console.log(tamanoHPx);
-  var tamanoW= screen.width*0.8;
+  var tamanoW= screen.width*0.7;
   var tamanoWPx= tamanoW + 'px' 
   console.log(screen.width);
   console.log(tamanoWPx);
@@ -235,6 +260,8 @@ var pointY = [-10697.8,-10099.8,-10099.8,-2558.84,-8828.84,-8828.84,-9858.8,-722
 
 
   var network = new vis.Network(canvas, data, options); 
+  return network;
+ 
 
 //network.on('select', function (properties) {
 //  alert('Se ha seleccionado el proceso: ' + properties.nodes);

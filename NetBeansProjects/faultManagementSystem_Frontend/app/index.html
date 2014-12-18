@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="faultManagementApp" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="faultManagementApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,20 +11,155 @@
   <link href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.css" rel="stylesheet">
   <link href="css/sb-admin-2.css" rel="stylesheet">
   <link rel="stylesheet" href="css/app.css">
-  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+<style type="text/css">
+.bold {
+  font-weight: bold;
+}
+.navbar-default ul {
+  list-style: none;
+  padding: 0px;
+}
+.navbar-default > li.sixth {
+border-left: 5px solid #4169E1;
+}
+.navbar-default li.divider {
+  border-bottom: 1px solid #000000 ;
+}
+.navbar-default > li {
+  margin: 1px 0px;
+}
+.navbar-default > li.navbar-default-active-background {
+  background-color: #e6e6e6;
+  border-left: 5px solid #00aef0;
+}
+.navbar-default li a {
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+  color: #337AB7;
+  outline: none;
+  background-color:#f8f8f8;
+}
+.navbar-default li li a {
+  padding: 5px 25px;
+}
+.navbar-default li li li a {
+  padding: 5px 35px;
+}
+.navbar-default li a:hover, .navbar-default li a:focus {
+	background-color: #ADD8E6;
+	border-left: 5px solid #99CCFF;
+	/* [disabled]font-size: 15px; */
+}
+
+.navbar.navbar-default.navbar-static-top .navbar-default.sidebar #side-menu .fa.fa-bar-chart-o.fa-fw a .glyphicon.glyphicon-chevron-right {
+	margin-right: 8px;
+}
+</style>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
+
+
+<div id="wrapper" ng-controller="appCtrl">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation"  style="background-color:#fff">
+  <ul class="nav navbar-top-links navbar-right" >
+    <li><img src="imagenes/UPM.jpg" class="img-responsive" width="150" style="margin-left: 6cm" /></li>
   </ul>
-  <div ng-view></div>
+  <div class="navbar-header"> <a class="navbar-brand" href="index.html"  style="margin-bottom: 2cm"><img src="imagenes/logo.png" class="img-responsive" width="700" /> </a>
+    <ul class="nav nav-tabs"  style="margin-left: 0.2cm">
+      <li role="presentation"><a href="#">Recording</a></li>
+      <li role="presentation" class="active"><a href="#">Debuging</a></li>
+    </ul>
+  </div>
+  <!-- /.navbar-header -->
+   <!-- /.navbar-header -->
+  <!-- /.navbar-header -->
 
-  <div>Angular seed app: v<span app-version></span></div>
+  <div class="navbar-default sidebar" role="navigation" style="margin-top: 4.7cm">
+    <ul id="side-menu" class="nav">
+    <li  style="padding-left: 1.5cm"> Process Browser
+      <li class="fa fa-bar-chart-o fa-fw"  ng-repeat="group in groups | orderBy:'module.Name' | unique:'module.Name'" > <a href="#" ng-click="changeSystemViewer(group.module)" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation"><span class="glyphicon glyphicon-chevron-right"></span>System: {{ group.module.Name}} </a>
+        <ul class="collapse" id="{{group.module.Name}}id">
+          <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module.Name | unique:'process.Name' "><a href="#" ng-click="changeProcessViewer(group.process)" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >Process: {{group.process.Name}}</a>
+            <ul class="collapse" id="{{group.process.Name}}" + "{{group.process.id}}">
+                <li  ng-repeat="group in groups | orderBy:'message.Type' | filter: group.process.Name |  unique:'message.Name'"  data-toggle="collapse" data-target="#{{group.message.Name}}"><a href="#" ng-click="showMessages(group.message.Name)">{{group.message.Type}}: {{group.message.Name}}</a> </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- /.navbar-static-side --> 
+</nav>
+<div id="page-wrapper">
+  <div class="row" >
+    <div class="panel panel-default"  style="margin-top: 0.5cm" >
+      <div class="panel-heading"> <i class="fa fa-bar-chart-o fa-fw"></i> Process Graph 
+       <!-- Buttor Right  -->
+        <div class="pull-right">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-xs" ng-click="resize()"> Resize <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">      
+      <img src="imagenes/graphFinal.svg" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>
+      <!-- <div class="img-responsive" id="mynetwork"></div> --> 
+    
+    </div>
+    <div class="panel panel-default"  style="margin-top: 0.5cm" >
+      <div class="panel-heading"> <i class="fa fa-bar-chart-o fa-fw"></i> Operation Details 
+        <!-- Buttor Right  -->
+        <div class="pull-right">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> Options <span class="caret"></span> </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+              <li><a href="#">Graphic</a> </li>
+              <li><a href="#">Another action</a> </li>
+              <li><a href="#">Something else here</a> </li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a> </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Buttor Right  --> 
+        <!-- Content Operation Details  --> 
+      </div>
+       <div class="panel-body">
+        <table class="table table-striped" ng-show="view=='message'">
+        <thead>
+	<tr>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Field</th>
+                <th>Type</th>
+		<th>Content</th>
+                
+	</tr>
+	</thead>
+        <tbody>
+        <tr ng-repeat="message in allMessage">
+            <td>{{message.messageIdmessage.idmessage}}</td>
+            <td>{{message.messageIdmessage.name}}</td>
+            <td>{{message.name}}</td>
+            <td>{{message.type}}</td>
+            <td>{{message.content}}</td>
+            
+        </tr>
+        </tbody>
+      </table>
+       <!-- Content Operation Details  -->
+    <!-- /.row --> 
+  </div>
+  <!-- /#page-wrapper --> 
+  </div>
+</div>
+<!-- /#wrapper --> 
+</body>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -48,5 +180,5 @@
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
 
-</body>
+
 </html>
