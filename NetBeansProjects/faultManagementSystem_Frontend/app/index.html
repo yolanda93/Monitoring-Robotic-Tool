@@ -16,8 +16,8 @@
   font-weight: bold;
 }
 .navbar-default ul {
-  list-style: none;
-  padding: 0px;
+	list-style: none;
+	padding: 2px;
 }
 .navbar-default > li.sixth {
 border-left: 5px solid #4169E1;
@@ -26,11 +26,11 @@ border-left: 5px solid #4169E1;
   border-bottom: 1px solid #000000 ;
 }
 .navbar-default > li {
-  margin: 1px 0px;
+  margin: 0px 0px;
 }
 .navbar-default > li.navbar-default-active-background {
   background-color: #e6e6e6;
-  border-left: 5px solid #00aef0;
+  border-left: 3px solid #00aef0;
 }
 .navbar-default li a {
   display: block;
@@ -41,20 +41,18 @@ border-left: 5px solid #4169E1;
   background-color:#f8f8f8;
 }
 .navbar-default li li a {
-  padding: 5px 25px;
+  padding: 4px 20px;
 }
 .navbar-default li li li a {
-  padding: 5px 35px;
+  padding: 4px 25px;
 }
 .navbar-default li a:hover, .navbar-default li a:focus {
 	background-color: #ADD8E6;
-	border-left: 5px solid #99CCFF;
+	border-left: 3px solid #99CCFF;
 	/* [disabled]font-size: 15px; */
 }
 
-.navbar.navbar-default.navbar-static-top .navbar-default.sidebar #side-menu .fa.fa-bar-chart-o.fa-fw a .glyphicon.glyphicon-chevron-right {
-	margin-right: 8px;
-}
+
 </style>
 </head>
 <body>
@@ -78,8 +76,8 @@ border-left: 5px solid #4169E1;
 
   <div class="navbar-default sidebar" role="navigation" style="margin-top: 4.7cm">
     <ul id="side-menu" class="nav">
-    <li  style="padding-left: 1.5cm"> Process Browser
-      <li class="fa fa-bar-chart-o fa-fw"  ng-repeat="group in groups | orderBy:'module.Name' | unique:'module.Name'" > <a href="#" ng-click="changeSystemViewer(group.module)" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation"><span class="glyphicon glyphicon-chevron-right"></span>System: {{ group.module.Name}} </a>
+    <li style="padding-left: 0.4cm"> Process Browser
+      <li class="fa fa-bar-chart-o fa-fw"  ng-repeat="group in groups | orderBy:'module.Name' | unique:'module.Name'" > <a href="#" ng-click="changeSystemViewer(group.module)" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation">System: {{ group.module.Name}} </a>
         <ul class="collapse" id="{{group.module.Name}}id">
           <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module.Name | unique:'process.Name' "><a href="#" ng-click="changeProcessViewer(group.process)" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >Process: {{group.process.Name}}</a>
             <ul class="collapse" id="{{group.process.Name}}" + "{{group.process.id}}">
@@ -106,7 +104,7 @@ border-left: 5px solid #4169E1;
         </div>
       </div>
       <div class="panel-body">      
-      <img src="imagenes/graphFinal.svg" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>
+      <img src="imagenes/graphFinal.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>
       <!-- <div class="img-responsive" id="mynetwork"></div> --> 
     
     </div>
