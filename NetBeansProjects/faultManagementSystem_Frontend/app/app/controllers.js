@@ -181,7 +181,7 @@ browser_data.status = {
   };
 
 
-alert("Se ha inicializado el Process Browser");
+//alert("Se ha inicializado el Process Browser");
 }
 
 
