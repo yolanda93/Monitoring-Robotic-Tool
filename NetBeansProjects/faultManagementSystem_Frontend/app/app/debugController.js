@@ -1,5 +1,7 @@
 myApp.controller('debugController',function($scope,message,processGroup,process,topic){
 
+
+$scope.viewBrowser = 'main';
 console.log("Debug Controller");
 //var graph = processGraph_draw();
 $scope.allMessage= message.findAll();
@@ -32,6 +34,14 @@ processBrowser_init($scope);
        offset:{x:0, y:0}
       };
      graph.focusOnNode(groupName.id,options);*/
+      console.log("Se ha seleccionado el sistema "+ groupName.Name);
+     if (groupName.Name == 'deviceDrivers') {
+         $scope.viewBrowser = 'deviceDrivers';
+      } 
+      if (groupName.Name == 'flightController') {
+         console.log("Se ha seleccionado el sistema "+ groupName.Name);
+         $scope.viewBrowser = 'FlightController';
+      } 
   };
   
   $scope.changeProcessViewer =function(processName){
@@ -46,6 +56,7 @@ processBrowser_init($scope);
   $scope.resize =function(){
      /*console.log("Resize ");  
      graph.zoomExtent();*/
+     $scope.viewBrowser = 'main';
  };
 
  
