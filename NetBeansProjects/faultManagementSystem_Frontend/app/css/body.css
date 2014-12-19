@@ -1,0 +1,26 @@
+body {
+	padding-top: 50px;
+	background-color: #eee;
+}
+/* Space out the masthead */
+.header {
+	margin-bottom: 30px;
+}
+.simple {
+	padding: 40px 15px;
+	text-align: center;
+}
+.simple-box {
+	border: 1px solid #ddd;
+	background-color: #fefefe;
+	max-width: 730px;
+	margin-left: auto;
+	margin-right:auto;
+}
+/* Override background color of jumbotron */
+.jumbotron {
+	background-color: #fefefe;
+}
+.breadcrumb {
+	background-color: #eee;
+}

@@ -3,21 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/app/controllers.js</file>
             <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/components/version/version_test.js</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/partials/partial1.html</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/components/version/interpolate-filter.js</file>
             <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/app/app.js</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/app/directives.js</file>
+            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/app/debugController.js</file>
             <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/app/services.js</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/partials/partial2.html</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/view1/view1.html</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/imagenes/graphFinal.svg</file>
+            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/partials/recording.html</file>
+            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/partials/debugging.html</file>
             <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/bower_components/html5-boilerplate/index.html</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/view2/view2.html</file>
+            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/app/recordController.js</file>
             <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/index.html</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/components/version/version-directive_test.js</file>
-            <file>file:/home/yolanda/NetBeansProjects/faultManagementSystem_Frontend/app/app/filters.js</file>
         </group>
     </open-files>
 </project-private>

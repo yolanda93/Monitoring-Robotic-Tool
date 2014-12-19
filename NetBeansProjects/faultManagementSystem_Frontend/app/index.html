@@ -1,188 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="faultManagementApp" class="no-js"> <!--<![endif]-->
+<html data-ng-app="myApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Fault Management System</title>
-  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-  <link href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.css" rel="stylesheet">
-  <link href="css/sb-admin-2.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/app.css">
-<style type="text/css">
-.bold {
-  font-weight: bold;
-}
-.navbar-default ul {
-	list-style: none;
-	padding: 2px;
-}
-.navbar-default > li.sixth {
-border-left: 5px solid #4169E1;
-}
-.navbar-default li.divider {
-  border-bottom: 1px solid #000000 ;
-}
-.navbar-default > li {
-  margin: 0px 0px;
-}
-.navbar-default > li.navbar-default-active-background {
-  background-color: #e6e6e6;
-  border-left: 3px solid #00aef0;
-}
-.navbar-default li a {
-  display: block;
-  text-decoration: none;
-  font-size: 14px;
-  color: #337AB7;
-  outline: none;
-  background-color:#f8f8f8;
-}
-.navbar-default li li a {
-  padding: 4px 20px;
-}
-.navbar-default li li li a {
-  padding: 4px 25px;
-}
-.navbar-default li a:hover, .navbar-default li a:focus {
-	background-color: #ADD8E6;
-	border-left: 3px solid #99CCFF;
-	/* [disabled]font-size: 15px; */
-}
+  <meta name="description" content="">
+  <meta name="author" content="">
 
+  <title>Fault Management System</title>
 
-</style>
-</head>
-<body>
+  <!-- Bootstrap core CSS-->
+  <link href="css/bootstrap-3.3.1-dist/dist/css/bootstrap.min.css" rel="stylesheet"> 
+          </head>
+          <body>
+            <div data-ng-controller="headerController">   
+              <nav class="navbar navbar-static-top" role="navigation">
+                <div class="container-fluid">
+                  <div>                   
+                     <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="img-responsive" width="700" /> </a>
+                   <div id="navbar">
+                    <ul class="nav navbar-nav navbar-right" style="margin-left: 9cm">    
+                       <li><img src="images/UPM.jpg" class="img-responsive" width="140"  /></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
 
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-12 col-md-12">
+                  <ul class="nav nav-tabs" >
+                    <li data-ng-class="{active: isActive('/debugging')}"><a href="#/debugging"><span class="glyphicon glyphicon-user"></span> Debugging <span class="sr-only">(current)</span></a></li>
+                    <li data-ng-class="{active: isActive('/recording')}"><a href="#/recording"><span class="glyphicon glyphicon-facetime-video"></span> Recording</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+           </div>
+            <div class="container col-sm-12 col-md-12 main">
+              <!-- Placeholder for views -->
+              <div data-ng-view=""></div>
+            </div><!-- /container -->
 
-<div id="wrapper" ng-controller="appCtrl">
-<!-- Navigation -->
+            <footer class="text-center">
+              <p>© 2014 - Grupo I&K - Universidad Politécnica de Madrid</p>
+            </footer>
 
-<nav class="navbar navbar-default navbar-static-top" role="navigation"  style="background-color:#fff">
-  
-    <ul class="nav navbar-top-links navbar-right" >
-    <li><img src="imagenes/UPM.jpg" class="img-responsive" width="150" style="margin-left: 6cm" /></li>
-  </ul>
-  <div class="navbar-header"> <a class="navbar-brand" href="index.html"  style="margin-bottom: 2cm"><img src="imagenes/logo.png" class="img-responsive" width="700" /> </a>
-    </div> 
-     <div class="navbar-header"> 
-     <tabset >
-      <tab heading="Recording"></tab>
-      <tab heading="Debugging"></tab>
-    </tabset>
-     </div>
-   
- 
-  <!-- /.navbar-header -->
-   <!-- /.navbar-header -->
-  <!-- /.navbar-header -->
-
-  <div class="navbar-default sidebar" role="navigation" style="margin-top: 4.7cm">
-    <ul id="side-menu" class="nav">
-    <li style="padding-left: 0.4cm"> Process Browser
-      <li class="fa fa-bar-chart-o fa-fw"  ng-repeat="group in groups | orderBy:'module.Name' | unique:'module.Name'" > <a href="#" ng-click="changeSystemViewer(group.module)" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation">System: {{ group.module.Name}} </a>
-        <ul class="collapse" id="{{group.module.Name}}id">
-          <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module.Name | unique:'process.Name' "><a href="#" ng-click="changeProcessViewer(group.process)" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >Process: {{group.process.Name}}</a>
-            <ul class="collapse" id="{{group.process.Name}}" + "{{group.process.id}}">
-                <li  ng-repeat="group in groups | orderBy:'message.Type' | filter: group.process.Name |  unique:'message.Name'"  data-toggle="collapse" data-target="#{{group.message.Name}}"><a href="#" ng-click="showMessages(group.message.Name)">{{group.message.Type}}: {{group.message.Name}}</a> </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      </li>
-    </ul>
-  </div>
-  
-  <!-- /.navbar-static-side --> 
-</nav>
-<div id="page-wrapper">
-  <div class="row" >
-    <div class="panel panel-default"  style="margin-top: 0.5cm" >
-      <div class="panel-heading"> <i class="fa fa-bar-chart-o fa-fw"></i> Process Graph 
-       <!-- Buttor Right  -->
-        <div class="pull-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default btn-xs" ng-click="resize()"> Resize <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
-          </div>
-        </div>
-      </div>
-      <div class="panel-body">      
-      <img src="imagenes/graphFinal.png" alt="grafoArquitectura" class="img-responsive" width="1203" height="497" /> </div>
-      <!-- <div class="img-responsive" id="mynetwork"></div> --> 
-    
-    </div>
-    <div class="panel panel-default"  style="margin-top: 0.5cm" >
-      <div class="panel-heading"> <i class="fa fa-bar-chart-o fa-fw"></i> Operation Details 
-        <!-- Buttor Right  -->
-        <div class="pull-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> Options <span class="caret"></span> </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-              <li><a href="#">Graphic</a> </li>
-              <li><a href="#">Another action</a> </li>
-              <li><a href="#">Something else here</a> </li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a> </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Buttor Right  --> 
-        <!-- Content Operation Details  --> 
-      </div>
-       <div class="panel-body">
-        <table class="table table-striped" ng-show="view=='message'">
-        <thead>
-	<tr>
-                <th>ID</th>
-                <th>Message</th>
-                <th>Field</th>
-                <th>Type</th>
-		<th>Content</th>
-                
-	</tr>
-	</thead>
-        <tbody>
-        <tr ng-repeat="message in allMessage">
-            <td>{{message.messageIdmessage.idmessage}}</td>
-            <td>{{message.messageIdmessage.name}}</td>
-            <td>{{message.name}}</td>
-            <td>{{message.type}}</td>
-            <td>{{message.content}}</td>
-            
-        </tr>
-        </tbody>
-      </table>
-       <!-- Content Operation Details  -->
-    <!-- /.row --> 
-  </div>
-  <!-- /#page-wrapper --> 
-  </div>
-</div>
-<!-- /#wrapper --> 
-</body>
-
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-  <script type="text/javascript" src="js/vis/vis.js"></script>
-  <script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/angular.min.js"></script>
-  <script type="text/javascript" src="js/ui-utils.js"></script>
-  <script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.0.min.js"></script>
-  <script src="app/app.js"></script>
-  <script src="app/services.js"></script>
-  <script src="app/controllers.js"></script>
-  <script src="app/filters.js"></script>
-  <script src="app/directives.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
-
-
-</html>
+            <script src="bower_components/angular/angular.js"></script>           
+            <script src="bower_components/angular-route/angular-route.js"></script>
+            <script src="bower_components/angular-resource/angular-resource.js"></script>
+            <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+            <script type="text/javascript" src="js/vis/vis.js"></script>
+            <script type="text/javascript" src="css/bootstrap-3.3.1-dist/dist/js/bootstrap.js"></script>
+            <script type="text/javascript" src="js/angular.min.js"></script>
+            <script type="text/javascript" src="js/ui-utils.js"></script>
+            <script type="text/javascript" src="js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+            <script src="app/app.js"></script>
+            <script src="app/debugController.js"></script>
+            <script src="app/recordController.js"></script>    
+            <script src="app/services.js"></script>   
+          </body>
+          </html>
