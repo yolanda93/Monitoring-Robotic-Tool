@@ -18,14 +18,11 @@
 .navbar-default > li {
 	margin: 0px 0px;
 }
-.navbar-default > li.navbar-default-active-background {
-	background-color: #fff;
-	border-left: 3px solid #00aef0;
-}
+
 .navbar-default li a {
 	display: block;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 11px;
 	color: #337AB7;
 	outline: none;
 	background-color: #fff;
@@ -35,23 +32,17 @@
 }
 .navbar-default li li li a {
 	padding: 4px 55px;
-    font-size: 12px;
+        font-size: 11px;
 }
-.navbar-default li a:hover, .navbar-default li a:focus {
-	background-color: #ADD8E6;
-	border-left: 3px solid #99CCFF;
-	font-size: 14px;
-	/* [disabled]font-size: 15px;
-*/
-}
+
 </style>
 
 <div>
-<div class="col-sm-2  col-md-2 " >
-  <div class="heading"  style="margin-top: 0.3cm; padding-rigth: 28px"> Process Browser
+<div class="col-sm-3  col-md-3 " >
+  <div class="heading"  style="margin-top: 0.3cm; margin-left: 14px"> Process Browser  </div>
     <div class="navbar-default sidebar" role="navigation">
       <ul id="side-menu" class="nav">
-        <li class="fa fa-bar-chart-o fa-fw"  ng-repeat="group in groups | orderBy:'module.Name' | unique:'module.Name'" > <a href="" ng-click="changeSystemViewer(group.module)" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation">System: {{ group.module.Name}} </a>
+        <li class="fa fa-bar-chart-o fa-fw"  ng-repeat="group in groups | unique:'module.Name'" > <a href="" ng-click="changeSystemViewer(group.module)" data-toggle="collapse" data-target="#{{group.module.Name}}id" data-parent="#side-navigation">System: {{ group.module.Name}} </a>
           <ul class="collapse" id="{{group.module.Name}}id">
             <li ng-repeat="group in groups | orderBy:'process.Name' | filter: group.module.Name | unique:'process.Name' "><a href="" ng-click="changeProcessViewer(group.process)" data-toggle="collapse" data-target="#{{group.process.Name}}" + "{{group.process.id}}" >Process: {{group.process.Name}}</a>
               <ul class="collapse" id="{{group.process.Name}}" + "{{group.process.id}}">
@@ -62,10 +53,9 @@
         </li>
       </ul>
     </div>
-  </div>
 </div>
 <div id="page-wrapper">
-<div class="col-sm-10 col-md-10" >
+<div class="col-sm-9 col-md-9" >
   <div class="panel panel-default"  style="margin-top: 0.3cm" >
     <div class="panel-heading"> Process Graph
       <div class="pull-right">
@@ -74,7 +64,7 @@
         </div>
       </div>
     </div>
-    <div  ng-show="viewBrowser=='deviceDrivers'" class="panel-body"> <img src="images/graphDeviceDrivers2.png" alt="grafoArquitectura" class="img-responsive" width="1450" height="497" /> </div>
+    <div  ng-show="viewBrowser=='deviceDrivers'" class="panel-body"> <img src="images/graphDeviceDrivers.png" alt="grafoArquitectura" class="img-responsive" width="1450" height="497" /> </div>
     <div  ng-show="viewBrowser=='FlightController'" class="panel-body"> <img src="images/graphFlightController.png" alt="grafoArquitectura" class="img-responsive" width="1450" height="497" /> </div>
     <div ng-show="viewBrowser=='main'" class="panel-body"> <img src="images/graphFinal.png" alt="grafoArquitectura" class="img-responsive" width="1450" height="497" /> </div>
     <!-- <div class="img-responsive" id="mynetwork"></div> --> 
@@ -109,7 +99,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="message in allMessage">
+          <tr ng-repeat="message in allMessage | unique: '2'" >
             <td>{{message.messageIdmessage.idmessage}}</td>
             <td>{{message.messageIdmessage.name}}</td>
             <td>{{message.name}}</td>

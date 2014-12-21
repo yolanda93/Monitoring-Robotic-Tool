@@ -1,12 +1,11 @@
 myApp.controller('debugController',function($scope,message,processGroup,process,topic){
-
-
+  $scope.state = {
+            open: false,
+        };
 $scope.viewBrowser = 'main';
-console.log("Debug Controller");
 //var graph = processGraph_draw();
 $scope.allMessage= message.findAll();
 processBrowser_init($scope);
- 
 
  $scope.showMessages =function(name){
       $scope.view = 'message';
@@ -36,14 +35,84 @@ processBrowser_init($scope);
      graph.focusOnNode(groupName.id,options);*/
       console.log("Se ha seleccionado el sistema "+ groupName.Name);
      if (groupName.Name == 'deviceDrivers') {
-         $scope.viewBrowser = 'deviceDrivers';
+          $scope.viewBrowser = 'deviceDrivers';
+           if($scope.state.open!=groupName.Name){            
+             $scope.state = {
+                open: groupName.Name
+              };         
+          }else{
+               $scope.state = {
+                open: false
+              };   
+          }
       } 
       if (groupName.Name == 'flightController') {
          console.log("Se ha seleccionado el sistema "+ groupName.Name);
          $scope.viewBrowser = 'FlightController';
+          if($scope.state.open!=groupName.Name){            
+             $scope.state = {
+                open: groupName.Name
+              };         
+          }else{
+               $scope.state = {
+                open: false
+              };   
+          }
       } 
+      if (groupName.Name == 'missionPlanner') {
+         console.log("Se ha seleccionado el sistema "+ groupName.Name);
+         $scope.viewBrowser = 'main';
+          if($scope.state.open!=groupName.Name){            
+             $scope.state = {
+                open: groupName.Name
+              };         
+          }else{
+               $scope.state = {
+                open: false
+              };   
+          }
+      } 
+      if (groupName.Name == 'poseEstimator') {
+         console.log("Se ha seleccionado el sistema "+ groupName.Name);
+         $scope.viewBrowser = 'main';
+          if($scope.state.open!=groupName.Name){            
+             $scope.state = {
+                open: groupName.Name
+              };         
+          }else{
+               $scope.state = {
+                open: false
+              };   
+          }
+      } 
+       if (groupName.Name == 'stateMapEstimator') {
+         console.log("Se ha seleccionado el sistema "+ groupName.Name);
+         $scope.viewBrowser = 'main';
+          if($scope.state.open!=groupName.Name){            
+             $scope.state = {
+                open: groupName.Name
+              };         
+          }else{
+               $scope.state = {
+                open: false
+              };   
+          }
+      }
+        if (groupName.Name == 'visionSystem') {
+         console.log("Se ha seleccionado el sistema "+ groupName.Name);
+         $scope.viewBrowser = 'main';
+          if($scope.state.open!=groupName.Name){            
+             $scope.state = {
+                open: groupName.Name
+              };         
+          }else{
+               $scope.state = {
+                open: false
+              };   
+          }
+      }
   };
-  
+    
   $scope.changeProcessViewer =function(processName){
      /*console.log("Se ha seleccionado el sistema "+ processName.Name +"con identificador "+ processName.id);  
       var options={
@@ -59,7 +128,10 @@ processBrowser_init($scope);
      $scope.viewBrowser = 'main';
  };
 
- 
+    $scope.isOpen = function(name) {
+        return name === $scope.state.open;
+    };
+    
 })
 
 
@@ -73,58 +145,13 @@ browser_data.oneAtATime = true;
 // Call to factory request to get modules, process and topics.
 /**/
 browser_data.groups = [
-                  {
-                    "module":{"id":"1","Name":"missionPlanner"},
-                    "process":{"id":"1", "Name": "missionPlanner"},
-                    "message":{"Name":"stateMapAbstraction", "Type":"Input"}                              
-                  },
-                  {
-                    "module":{"id":"1","Name":"missionPlanner"},
-                    "process":{"id":"1", "Name":  "missionPlanner"},
-                    "message":{"Name":"actionRequest","Type":"Input"}                                 
-                  },
-                  {
-                    "module": {"id":"2","Name":"fligthController"},
-                    "process": {"id":"2","Name": "fligthController"},
-                    "message":{"Name": "stateMapAbstraction","Type":"Input"}
-                  },
-                  {
-                    "module": {"id":"2","Name":"fligthController"},
-                    "process":{"id":"2","Name": "fligthController"},
-                    "message":{"Name":"actionRequest","Type":"Output"}
-                  },
-                  {
-                    "module": {"id":"2","Name":"fligthController"},
-                    "process": {"id":"2","Name":  "fligthController"},
-                    "message":{"Name":"actionConfirmation","Type":"Input"}
-                  },
-                  {
-                    "module": {"id":"2","Name":"fligthController"},
-                    "process": {"id":"2","Name": "fligthController"},
-                    "message":{"Name":"flightOrder","Type":"Input"}
-                  },
-                  {
-                    "module": {"id":"2","Name":"fligthController"},
-                    "process": {"id":"3","Name":  "pilotDriver"},
-                    "message":{"Name": "flightOrder","Type":"Output"}
-                  },
-                  {
-                    "module": {"id":"3","Name":"deviceDrivers"},
-                    "process": {"id":"4","Name":  "odometryDriver"},
-                    "message":{"Name":"odometryChange","Type":"Output"}
-                  },           
-                  {
-                    "module": {"id":"3","Name":"deviceDrivers"},
-                    "process": {"id":"5", "Name": "cameraDriver"},
-                    "message":{"Name": "realImageOnFlight","Type":"Output"} 
-                  },
-                   {
-                    "module":{"id":"3","Name":"deviceDrivers"},
+                     {
+                    "module":{"id":"3","Name":"visionSystem"},
                     "process": {"id":"6","Name":  "cameraProcessor"},
                     "message":{"Name": "realImageOnFlight","Type":"Output"}
                   },
                   {
-                    "module":{"id":"3","Name":"deviceDrivers"},
+                    "module":{"id":"3","Name":"visionSystem"},
                     "process": {"id":"6","Name":  "cameraProcessor"},
                     "message":{"Name": "cameraAbstraction","Type":"Output"}
                   },
@@ -158,6 +185,51 @@ browser_data.groups = [
                     "process": {"id":"8","Name":  "gridDetector"},
                     "message": {"Name": "cameraFrameAbstraction","Type":"Output"}
                   },
+                  {
+                    "module":{"id":"1","Name":"missionPlanner"},
+                    "process":{"id":"1", "Name": "missionPlanner"},
+                    "message":{"Name":"stateMapAbstraction", "Type":"Input"}                              
+                  },
+                  {
+                    "module":{"id":"1","Name":"missionPlanner"},
+                    "process":{"id":"1", "Name":  "missionPlanner"},
+                    "message":{"Name":"actionRequest","Type":"Input"}                                 
+                  },
+                  {
+                    "module": {"id":"2","Name":"flightController"},
+                    "process": {"id":"2","Name": "flightController"},
+                    "message":{"Name": "stateMapAbstraction","Type":"Input"}
+                  },
+                  {
+                    "module": {"id":"2","Name":"flightController"},
+                    "process":{"id":"2","Name": "flightController"},
+                    "message":{"Name":"actionRequest","Type":"Output"}
+                  },
+                  {
+                    "module": {"id":"2","Name":"flightController"},
+                    "process": {"id":"2","Name":  "flightController"},
+                    "message":{"Name":"actionConfirmation","Type":"Input"}
+                  },
+                  {
+                    "module": {"id":"2","Name":"flightController"},
+                    "process": {"id":"2","Name": "flightController"},
+                    "message":{"Name":"flightOrder","Type":"Input"}
+                  },
+                  {
+                    "module": {"id":"2","Name":"deviceDrivers"},
+                    "process": {"id":"3","Name":  "pilotDriver"},
+                    "message":{"Name": "flightOrder","Type":"Output"}
+                  },
+                  {
+                    "module": {"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"4","Name":  "odometryDriver"},
+                    "message":{"Name":"odometryChange","Type":"Output"}
+                  },           
+                  {
+                    "module": {"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"5", "Name": "cameraDriver"},
+                    "message":{"Name": "realImageOnFlight","Type":"Output"} 
+                  },              
                   {
                     "module": {"id":"5","Name":"stateMapEstimator"},
                     "process": {"id":"9","Name":  "stateMapEstimator"},

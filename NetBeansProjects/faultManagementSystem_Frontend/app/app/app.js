@@ -1,11 +1,11 @@
-var myApp = angular.module('myApp', ['ngRoute','services','ui.bootstrap','ui.utils']);
+var myApp = angular.module('myApp', ['ngRoute','services','ui.bootstrap','ui.utils','timer']);
 
 myApp.config(function ($routeProvider) {
   $routeProvider
-  .when('/recording',
+  .when('/monitoring',
   {
-    controller: 'recordController',
-    templateUrl: './partials/recording.html'
+    controller: 'monitorController',
+    templateUrl: './partials/monitoring.html'
   })
   .when('/debugging', 
   {

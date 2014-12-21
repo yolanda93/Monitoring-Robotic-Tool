@@ -1,6 +1,5 @@
 'use strict';
 
-/*serivces*/
 
 var service = angular.module('services',['ngResource']);
 

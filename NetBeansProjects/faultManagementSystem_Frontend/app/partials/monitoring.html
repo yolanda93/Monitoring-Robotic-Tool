@@ -1,0 +1,33 @@
+
+<div class="col-sm-12  col-md-12 " style="margin-top: 0.3cm;">
+          <!-- Debug Console-->
+          <div class="navbar-header">
+           <div style="padding-left: 2cm">
+           <ul class="nav navbar-nav">
+                  <button type="button" class="btn btn-default" ng-click="startTimer()" ng-disabled="timerRunning" ><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>                 
+                  <button type="button" class="btn btn-default" ng-click="stopTimer()" ng-disabled="!timerRunning"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+                 
+           </ul>          
+         </div>
+       </div>
+      </div>
+      <div ng-show='timerRunning'>Recording...</div> 
+      <div>
+        <timer  autostart="false" interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
+      </div> 
+        
+
+
+<div class="col-sm-12  col-md-12 ">
+<div class="panel panel-default"  style="margin-top: 0.3cm" >
+    <div class="panel-heading"> Process Graph
+      <div class="pull-right">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-xs" ng-click="resize()"> Resize <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body"> <img src="images/graphFinal.png" alt="grafoArquitectura" class="img-responsive" width="1450" height="497" /> </div>
+    <!-- <div class="img-responsive" id="mynetwork"></div> --> 
+</div>
+    </div>
