@@ -100,7 +100,7 @@ processBrowser_init($scope);
       }
         if (groupName.Name == 'visionSystem') {
          console.log("Se ha seleccionado el sistema "+ groupName.Name);
-         $scope.viewBrowser = 'main';
+         $scope.viewBrowser = 'visionSystem';
           if($scope.state.open!=groupName.Name){            
              $scope.state = {
                 open: groupName.Name
@@ -172,7 +172,7 @@ browser_data.groups = [
                   },                  
                   {
                     "module":{"id":"4","Name":"visionSystem"},
-                    "process": {"id":"7","Name":  "robotDetectorr"},
+                    "process": {"id":"7","Name":  "robotDetector"},
                     "message": {"Name":"UAVPositionChange","Type":"Output"}
                   },
                   {
@@ -185,6 +185,21 @@ browser_data.groups = [
                     "process": {"id":"8","Name":  "gridDetector"},
                     "message": {"Name": "cameraFrameAbstraction","Type":"Output"}
                   },
+                  {
+                    "module": {"id":"2","Name":"deviceDrivers"},
+                    "process": {"id":"3","Name":  "pilotDriver"},
+                    "message":{"Name": "flightOrder","Type":"Output"}
+                  },
+                  {
+                    "module": {"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"4","Name":  "odometryDriver"},
+                    "message":{"Name":"odometryChange","Type":"Output"}
+                  },           
+                  {
+                    "module": {"id":"3","Name":"deviceDrivers"},
+                    "process": {"id":"5", "Name": "cameraDriver"},
+                    "message":{"Name": "realImageOnFlight","Type":"Output"} 
+                  }, 
                   {
                     "module":{"id":"1","Name":"missionPlanner"},
                     "process":{"id":"1", "Name": "missionPlanner"},
@@ -214,22 +229,7 @@ browser_data.groups = [
                     "module": {"id":"2","Name":"flightController"},
                     "process": {"id":"2","Name": "flightController"},
                     "message":{"Name":"flightOrder","Type":"Input"}
-                  },
-                  {
-                    "module": {"id":"2","Name":"deviceDrivers"},
-                    "process": {"id":"3","Name":  "pilotDriver"},
-                    "message":{"Name": "flightOrder","Type":"Output"}
-                  },
-                  {
-                    "module": {"id":"3","Name":"deviceDrivers"},
-                    "process": {"id":"4","Name":  "odometryDriver"},
-                    "message":{"Name":"odometryChange","Type":"Output"}
-                  },           
-                  {
-                    "module": {"id":"3","Name":"deviceDrivers"},
-                    "process": {"id":"5", "Name": "cameraDriver"},
-                    "message":{"Name": "realImageOnFlight","Type":"Output"} 
-                  },              
+                  },                           
                   {
                     "module": {"id":"5","Name":"stateMapEstimator"},
                     "process": {"id":"9","Name":  "stateMapEstimator"},
@@ -252,7 +252,7 @@ browser_data.groups = [
                   },
                   {
                     "module": {"id":"6","Name":"poseEstimator"},
-                    "process": {"id":"9", "Name": "poseEstimatorr"}, 
+                    "process": {"id":"9", "Name": "poseEstimator"}, 
                     "message":{"Name":"UAVPositionChange","Type":"Output"}
                   }
               ];
